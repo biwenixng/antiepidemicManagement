@@ -1,0 +1,15 @@
+span{
+	color:red;
+}
+
+.left{
+	float: left;
+}
+
+.right{
+	float: right;
+}
+
+.marg{
+	margin-top: 35px;
+}
