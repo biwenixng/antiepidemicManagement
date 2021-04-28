@@ -33,22 +33,11 @@ public class PopularlzationServlet extends HttpServlet {
 	@ResponseBody
 	protected List<Popularlzations> selectAll()  {
 		List<Popularlzations> list = service.selectAll();
-		System.out.println(list);
-        return list;
+		return list;
 	}
 
 	@RequestMapping("/selectOne")
-	protected void selectOne(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		String pid = request.getParameter("pid");
-//
-//		Connection conn = DBUtils.getConnection();
-//
-//		Popularlzations selectInfo = service.selectInfo(conn,Integer.parseInt(pid));
-//
-//		request.setAttribute("news", selectInfo);
-//
-//		DBUtils.release(conn, null, null);
-//
-//		request.getRequestDispatcher("/web/page.jsp").forward(request, response);
+	protected void selectOne(){
+
 	}
 }

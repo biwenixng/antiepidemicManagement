@@ -173,27 +173,27 @@
                     )
                 $("#tab").append($tr)
             }
-        })
-    }, $.ajax({
+        });
+        $.ajax({
             "url" : 'popularlzation/selectAll',
             "type" : "post",
-            "dataType":"application/json",
+            "dataType":"json",
             "success" : function(data) {
-                <%--for(var i = 0; i < data.length;i ++) {--%>
-                <%--    var $div = $("<div class='one col-lg-6'></div>");--%>
-                <%--    // var $ep = "/Zxiangmu/" + data[i].imageurl;--%>
-                <%--    &lt;%&ndash;var $img = $("<img src=\"<c:url value='\"+$ep+\"'/>\" width='200px' height='150px' style='margin-bottom: 2%;'/><br/>");&ndash;%&gt;--%>
-                <%--    var $h6 = $("<a href=\"/popularlzation/doget?pid=\"+data[i].pid>"+data[i].title+"</a>");--%>
-
-                <%--    $div.append($img);--%>
-                <%--    $div.append($h6);--%>
-                <%--    $("#pop").append($div);--%>
-                <%--}--%>
-                console.log(data)
-                alert("11")
+                for(var i = 0; i < data.length;i ++) {
+                    var $div = $("<div class='one col-lg-6'></div>");
+                    // var $ep = "/Zxiangmu/" + data[i].imageurl;
+                    <%--var $img = $("<img src=\"<c:url value='\"+$ep+\"'/>\" width='200px' height='150px' style='margin-bottom: 2%;'/><br/>");--%>
+                    var $url = data[i].imageurl;
+                    var $h6 = $("<a href=\"<c:url value='\"+$url+\"'/>\">"+data[i].title+"</a>");
+                    // $div.append($img);
+                    $div.append($h6);
+                    $("#pop").append($div);
+                }
+            },
+            error: function (response) {
+                alert("error");
             }
-        })
-        ,
+        });
         $(window).scroll(function(){
             if ($(window).scrollTop()>1){
                 $("#goToTop").fadeIn();
@@ -202,12 +202,12 @@
             {
                 $("#goToTop").fadeOut();
             }
-        }),
+        });
         /*回到顶部*/
         $('#goToTop a').click(function(){
         $('html,body').animate({scrollTop:0},'slow');
+    });
     })
-    )
 </script>
 
 </html>

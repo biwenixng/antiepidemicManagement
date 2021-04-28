@@ -65,7 +65,16 @@ public class PopularlZation {
 		this.imageurl = imageurl;
 		this.show = show;
 	}
-	
 
-	 
+	@Override
+	public String toString() {
+		return "PopularlZation{" +
+				"pid=" + pid +
+				", title='" + title + '\'' +
+				", center='" + center + '\'' +
+				", addTime='" + addTime + '\'' +
+				", imageurl='" + imageurl + '\'' +
+				", show='" + show + '\'' +
+				'}';
+	}
 }
