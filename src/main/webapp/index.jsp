@@ -6,11 +6,11 @@
     <title>首页</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--导入css库-->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css"/>
     <!--导入jq-->
-    <script type="text/javascript" src="bootstrap/js/jq.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/jq.js"></script>
     <!--导入js库-->
-    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
     <style type="text/css">
         body{ text-align: center}
         .div{
@@ -56,6 +56,10 @@
         }
     </style>
 </head>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <body style="background: url(<c:url value="/video/b1.jpg"/> )" >
 <div class="container">
     <nav class="navbar navbar-default">
@@ -73,16 +77,16 @@
             <div id="navbar" class="navbar-collapse collapse ">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">防疫专区</a></li>
-                    <li>预约看病</li>
-                    <li>防疫商城</li>
-                    <li>个人中心</li>
+                    <li class="active"><a href="#">预约看病</a></li>
+                    <li class="active"><a href="#">防疫商城</a></li>
+                    <li class="active"><a href="#">个人中心</a></li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <c:choose>
                         <c:when test="${not empty username}">
-                            <li class="active"><a href="#">欢迎您 <span class="sr-only">(current)</span></a></li>
-                            <li>退出</li>
+                            <li class="active"><a href="#">欢迎您，${username} <span class="sr-only">(current)</span></a></li>
+                            <li><a href="<%=basePath%>/userLoginServlet/logout">注销</a></li>
                         </c:when>
                         <c:otherwise>
                             <li class="active"><a href="<c:url value="/user/user_login/user_login.jsp"/>">登入 <span class="sr-only">(current)</span></a></li>
@@ -175,7 +179,7 @@
             }
         });
         $.ajax({
-            "url" : 'popularlzation/selectAll',
+            "url" : '<%=basePath%>/popularlzation/selectAll',
             "type" : "post",
             "dataType":"json",
             "success" : function(data) {

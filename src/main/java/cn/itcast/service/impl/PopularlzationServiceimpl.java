@@ -24,8 +24,8 @@ public class PopularlzationServiceimpl implements PopularlzationService {
 		return list;
 	}
 
-	@Override
-	public Popularlzations selectInfo(int nid) {
+//	@Override
+//	public Popularlzations selectInfo(int nid) {
 //		Connection conn = DBUtils.getConnection();
 //		List<Popularlzations> selectAll = service.selectAll(conn);
 //
@@ -33,8 +33,8 @@ public class PopularlzationServiceimpl implements PopularlzationService {
 //
 //		resp.getWriter().print(json);
 //		req.getRequestDispatcher(json);
-		return dao.selectInfo(nid);
-	}
+//		return dao.selectInfo(nid);
+//	}
 
 	protected void selectOne(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		String pid = request.getParameter("pid");
@@ -42,6 +42,5 @@ public class PopularlzationServiceimpl implements PopularlzationService {
 //		Popularlzations selectInfo = service.selectInfo(conn,Integer.parseInt(pid));
 //		request.setAttribute("news", selectInfo);
 //		DBUtils.release(conn, null, null);
-//		request.getRequestDispatcher("/web/page.jsp").forward(request, response);
 	}
 }

@@ -32,6 +32,10 @@
 	})
 </script>
 <link type="text/css" rel="stylesheet" href="<c:url value="/user/user_css/user_login.css"/>" />
+	<%
+		String path = request.getContextPath();
+	    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	%>
 </head>
 <body class = "exit">
 	<div class="main">
@@ -56,9 +60,7 @@
 					<c:if test="${not empty requestScope.message}">
 					   <span class="ts" style="font-family:'黑体';color:red;font-size: 30px">${requestScope.message}</span>
 					</c:if>
-					<form action="<%=application.getContextPath()%>/UserLoginServlet"
-						method="post">
-						
+					<form action="<%=basePath%>/userLoginServlet/login" method="post">
 						<div class="txt">
 							<span style="letter-spacing: 8px;">用户名:</span> <input name="uid"
 								type="text" class="txtphone" id="uid" placeholder="请输入用户名" />

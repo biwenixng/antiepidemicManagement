@@ -14,13 +14,6 @@ public interface PopularlzationDao {
 	 * 查询所有
 	 * @return
 	 */
-	@Select({"SELECT * FROM a_popularlzation where `show`='1'"})
 	public List<Popularlzations> selectAll();
-	/**
-	 * 查询一条
-	 * @param pid
-	 * @return
-	 */
-	@Select({"SELECT * FROM a_popularlzation WHERE pid = ?"})
-	public Popularlzations selectInfo(int pid);
+//	public Popularlzations selectInfo(int pid);
 }

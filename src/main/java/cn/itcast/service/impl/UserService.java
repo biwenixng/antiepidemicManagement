@@ -1,0 +1,187 @@
+package cn.itcast.service.impl;
+
+import cn.itcast.dao.UserDao;
+import cn.itcast.domain.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+import java.sql.Connection;
+import java.util.List;
+
+@Service("userService")
+public class UserService {
+    @Autowired
+	private UserDao userDao;
+		public String userLogin(AUserLogin newLogin) {
+			AUserLogin login = userDao.userLogin(newLogin);
+			if(login==null){
+				return  "账号或密码错误";
+			}else {
+				return "登录成功";
+			}
+		}
+	    //10 09
+		public int userLogin2(String phone) {
+			List<AUserLogin2> login = userDao.userLogin2();
+			for (AUserLogin2 ln : login) {
+				if (ln.getPhone().equals(phone)) {
+					return 1;
+				}
+			}
+			return 0;
+		}
+	//用户登录(手机登录，通过手机号码拿到用户名)
+		public String phoneFindUserName(String phone) {
+			AUserLogin aUserLogin = new AUserLogin();
+			aUserLogin.setPhone(phone);
+			AUserLogin login = userDao.userLogin(aUserLogin);
+			if(login != null){
+				return login.getUsername();
+			}
+			return "无";
+		}
+
+
+		//10 09
+		public String doctorLogin(DUserLogin newLogin) {
+			List<DUserLogin> login = userDao.doctorLogin();
+			for (DUserLogin ln : login) {
+				if (ln.getUsername().equals(newLogin.getUsername())) {
+					if (ln.getShow().equals("1")) {
+						if (ln.getPassword().equals(newLogin.getPassword())) {
+							
+							return "登录成功";
+						} else {
+							return "密码错误";
+						}
+					} else {
+						return "该账户被冻结";
+					}
+				}
+			}
+			return "该用户不存在,请重新核对用户名及密码";
+		}
+
+		//10 09
+		public String adminLogin(MUserLogin newLogin) {
+			List<MUserLogin> login = userDao.adminLogin();
+			for (MUserLogin ln : login) {
+				if (ln.getUsername().equals(newLogin.getUsername())) {
+					if (ln.getShow().equals("1")) {
+						if (ln.getPassword().equals(newLogin.getPassword())) {
+							
+							return "登录成功";
+						} else {
+							return "密码错误";
+						}
+					} else {
+						return "该账号被冻结";
+					}
+				}
+			}
+			return "管理员名不存在";
+		}
+    
+		//1011
+		public String AdminJudge(String username) {
+			List<MUserLogin> login = userDao.adminLogin();
+			for(MUserLogin k :login) {
+				if(username.equals(k.getUsername())) {
+					return k.getJuisdiction();
+				}
+			}
+			return "无";
+		}
+
+	public String userIdNumber(String idnumber) {
+		AUserLogin aUserLogin = new AUserLogin();
+		aUserLogin.setPhone(idnumber);
+		AUserLogin login = userDao.userLogin(aUserLogin);
+		if(login != null){
+			return "该身份证已被注册!";
+		}
+		return "没问题";
+	}
+	
+
+	public String userPhone(String phone) {
+		AUserLogin aUserLogin = new AUserLogin();
+		aUserLogin.setPhone(phone);
+		AUserLogin login = userDao.userLogin(aUserLogin);
+		if(login != null){
+			return "该手机号码已被注册!";
+		}
+		return "没问题";		
+	}
+	
+
+	public String userRegistered(String uid) {
+		AUserLogin aUserLogin = new AUserLogin();
+		aUserLogin.setPhone(uid);
+		AUserLogin login = userDao.userLogin(aUserLogin);
+		if(login != null){
+			return "该用户名已存在!";
+		}
+		return "可用";
+		
+	}
+
+
+	public List<School> findSchool() {
+		return userDao.findSchool();
+	}
+	
+
+	 public List<Floor> findFloor(String schoolname) {
+		 
+		 return userDao.findFloor(schoolname);
+	 }
+	
+
+	 public List<Dormitory> findDormitory(String floorname) {
+		 return userDao.findDormitory(floorname);
+	 }
+
+	 public String userRegistered(AUserRegistered user) {
+		 int number = userDao.userRegistered(user);
+		 if(number!=0) {
+			 return "该用户已存在";
+		 }else {
+			 return "可用";
+		 }
+	 }
+
+	public String userFindPassword1(String phone) {
+		List<AUserRegistered> user = userDao.userFindPassword1();
+		int number = 0;
+	    for(AUserRegistered k : user) {
+	    	if(k.getPhone().equals(phone)) {
+	    		number = 1;
+	    	}
+	    }
+	    if(number == 0) {
+	    	return "该手机号码不存在";
+	    }
+	    return "该手机号码存在";
+	    
+	}
+
+	public String userFindPassword2(String phone , String pwd) {
+		int number = userDao.userFindPassword2(phone, pwd);
+		if(number!=0) {
+			return "密码重置成功";
+		}
+		return "重置失败";
+		
+		
+	}
+
+	public String getName(Connection con, String name) {
+		return userDao.getName(name);
+	}
+	public boolean forWord(Connection conn,Forward forward) {
+		return userDao.forWord(forward);
+	}
+
+}

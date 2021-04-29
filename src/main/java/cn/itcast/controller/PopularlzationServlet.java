@@ -26,7 +26,6 @@ public class PopularlzationServlet extends HttpServlet {
 	@Override
 	@RequestMapping("/doget")
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-
 	}
 
 	@RequestMapping("/selectAll")

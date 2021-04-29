@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.UserDao">
+    <insert id="forWord">
+        INSERT INTO a_forward (duser,auser,appointtime,appointmenttime,phone)
+        VALUES(#{duser},#{auser},#{appointtime},#{appointmenttime},#{phone})
+    </insert>
+
+    <select id="userLogin" parameterType="cn.itcast.domain.AUserLogin" resultType="cn.itcast.domain.AUserLogin">
+        SELECT username,password,idnumber,phone
+        FROM a_user
+        <where>
+            <if test="username != null and username != ''">
+                AND username = #{username}
+            </if>
+            <if test="userpassword != null and userpassword != ''">
+                AND password = #{userpassword}
+            </if>
+            <if test="phone != null and phone != ''">
+                AND phone = #{phone}
+            </if>
+            <if test="idnumber != null and idnumber != ''">
+                AND idnumber = #{idnumber}
+            </if>
+        </where>
+    </select>
+</mapper>
