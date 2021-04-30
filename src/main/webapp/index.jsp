@@ -86,7 +86,7 @@
                     <c:choose>
                         <c:when test="${not empty username}">
                             <li class="active"><a href="#">欢迎您，${username} <span class="sr-only">(current)</span></a></li>
-                            <li><a href="<%=basePath%>/userLoginServlet/logout">注销</a></li>
+                            <li><a href="<%=basePath%>userLoginServlet/logout">注销</a></li>
                         </c:when>
                         <c:otherwise>
                             <li class="active"><a href="<c:url value="/user/user_login/user_login.jsp"/>">登入 <span class="sr-only">(current)</span></a></li>
@@ -179,7 +179,7 @@
             }
         });
         $.ajax({
-            "url" : '<%=basePath%>/popularlzation/selectAll',
+            "url" : '<%=basePath%>popularlzation/selectAll',
             "type" : "post",
             "dataType":"json",
             "success" : function(data) {

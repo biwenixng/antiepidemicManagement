@@ -18,11 +18,15 @@
 <script type="text/javascript" src="<c:url value="/bootstrap/js/bootstrap.min.js" />"></script>
 
 <script type="text/javascript">
+	<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    %>
 $(document).ready(function () {
 	var height=$(document).height();
 	$('.main').css('height',height);
     $.get({
-         "url":"<c:url value='/UserRegisteredAjax4Servlet'/>",
+         "url":"<%=basePath%>userRegisteredServlet/findSchool",
          "data":null,
          "dataType":"json",
          "success" : function(data) {
@@ -39,7 +43,6 @@ $(document).ready(function () {
 <link type="text/css" rel="stylesheet" href="<c:url value="/user/user_css/zhuce.css" />" />
 
 </head>
-
 <body>
 	<div class="main">
 		<div class="main0">
@@ -59,7 +62,7 @@ $(document).ready(function () {
 					</p>
 				</div>
 				<form
-					action="<%=application.getContextPath()%>/UserRegistered1Servlet"
+					action="<%=basePath%>userRegisteredServlet/registerNO1"
 					method="post">
 					<div class="txt form-group">
 						<span style="letter-spacing: 10px;">身份证号:</span> <input name="cid"
@@ -102,7 +105,7 @@ $("#cid").blur(function (){
        $("#cid").val("");
 	}else if(cid){
 		$.post({
-			"url" : "<c:url value='/UserRegisteredAjaxServlet'/>",
+			"url" : "<%=basePath%>userRegisteredServlet/userIdNumber",
 			"data" : "cid=" + $("#cid").val(),
 			"dataType" : "text",
 			"success" : function(data) {
@@ -133,12 +136,12 @@ $("#cphone").blur(function (){
 		$("#cphone").val("");
 	}else if(cphone){
 		$.post({
-			"url" : "<c:url value='/UserRegisteredAjax3Servlet'/>",
+			"url" : "<%=basePath%>userRegisteredServlet/userPhone",
 			"data" : "cphone=" + $("#cphone").val(),
 			"dataType" : "text",
 			"success" : function(data) {
-				if (data == "该手机号码已被注册!") {
-					alert(data);
+				if (data == 0) {
+					alert("该号码已经使用");
 					$("#cphone").val("");
 				}
 			}
@@ -164,7 +167,7 @@ $(".xiayibu").click(function (){
 <script type="text/javascript">
 $("#tower").change(function(){
 	  $.post({
-        "url":"<c:url value='/UserRegisteredAjax5Servlet'/>",
+        "url":"<%=basePath%>userRegisteredServlet/findFloor",
         "data":"tower=" + $("#tower").val(),
         "dataType":"json",
         "success" : function(data) {
@@ -182,7 +185,7 @@ $("#tower").change(function(){
 });
 $("#floor").change(function(){
 	$.post({
-        "url":"<c:url value='/UserRegisteredAjax6Servlet'/>",
+        "url":"<%=basePath%>userRegisteredServlet/findDormitory",
         "data":"floor=" + $("#floor").val(),
         "dataType":"json",
         "success" : function(data) {

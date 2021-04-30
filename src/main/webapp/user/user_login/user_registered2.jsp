@@ -27,7 +27,10 @@
 <title>注册</title>
 <link type="text/css" rel="stylesheet" href="<c:url value="/user/user_css/zhuce.css" />"/>
 </head>
-
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <body>
 	<div class="main">
 		<div class="main0">

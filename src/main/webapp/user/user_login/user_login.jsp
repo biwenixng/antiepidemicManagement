@@ -60,7 +60,7 @@
 					<c:if test="${not empty requestScope.message}">
 					   <span class="ts" style="font-family:'黑体';color:red;font-size: 30px">${requestScope.message}</span>
 					</c:if>
-					<form action="<%=basePath%>/userLoginServlet/login" method="post">
+					<form action="<%=basePath%>userLoginServlet/login" method="post">
 						<div class="txt">
 							<span style="letter-spacing: 8px;">用户名:</span> <input name="uid"
 								type="text" class="txtphone" id="uid" placeholder="请输入用户名" />

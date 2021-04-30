@@ -96,23 +96,23 @@ public class UserService {
 
 	public String userIdNumber(String idnumber) {
 		AUserLogin aUserLogin = new AUserLogin();
-		aUserLogin.setPhone(idnumber);
+		aUserLogin.setIdnumber(idnumber);
 		AUserLogin login = userDao.userLogin(aUserLogin);
 		if(login != null){
-			return "该身份证已被注册!";
+			return "该身份证号码已被注册!";
 		}
 		return "没问题";
 	}
 	
 
-	public String userPhone(String phone) {
+	public int userPhone(String phone) {
 		AUserLogin aUserLogin = new AUserLogin();
 		aUserLogin.setPhone(phone);
 		AUserLogin login = userDao.userLogin(aUserLogin);
 		if(login != null){
-			return "该手机号码已被注册!";
+			return 0;
 		}
-		return "没问题";		
+		return 1;
 	}
 	
 
@@ -127,14 +127,20 @@ public class UserService {
 		
 	}
 
-
+	/**
+	 * 校区
+	 * @return
+	 */
 	public List<School> findSchool() {
 		return userDao.findSchool();
 	}
-	
 
+	/**
+	 * 楼层
+	 * @param schoolname
+	 * @return
+	 */
 	 public List<Floor> findFloor(String schoolname) {
-		 
 		 return userDao.findFloor(schoolname);
 	 }
 	

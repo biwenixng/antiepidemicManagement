@@ -29,9 +29,32 @@ public interface UserDao {
     public List<AUserLogin2> userLogin2();
     public List<DUserLogin> doctorLogin();
     public List<MUserLogin> adminLogin();
+
+    /**
+     * 获取校区
+     * @return
+     */
     public List<School> findSchool();
-    public List<Floor> findFloor(String schoolname);
-    public List<Dormitory> findDormitory(String floorname);
+
+    /**
+     * 获取楼
+     * @param schoolname
+     * @return
+     */
+    public List<Floor> findFloor(@Param("schoolname") String schoolname);
+
+    /**
+     * 获取寝室
+     * @param floorname
+     * @return
+     */
+    public List<Dormitory> findDormitory(@Param("floorname") String floorname);
+
+    /**
+     * 注册
+     * @param user
+     * @return
+     */
     public int userRegistered(AUserRegistered user);
     public List<AUserRegistered> userFindPassword1();
     public int userFindPassword2(String phone, String pwd);

@@ -26,4 +26,26 @@
             </if>
         </where>
     </select>
+
+    <select id="findSchool" resultType="cn.itcast.domain.School">
+       SELECT *
+       FROM a_school
+    </select>
+
+    <select id="findFloor" resultType="cn.itcast.domain.Floor">
+       SELECT *
+       FROM a_floor
+	   WHERE schoolname =  #{schoolname}
+    </select>
+
+
+    <select id="findDormitory" resultType="cn.itcast.domain.Dormitory">
+        SELECT * FROM a_dormitory
+		WHERE floorname = #{floorname}
+    </select>
+
+    <insert id="userRegistered" parameterType="cn.itcast.domain.AUser">
+       INSERT INTO a_user(`username`,`password`,`residence`,`name`,`phone`,`idnumber`)
+	   values(#{username},#{password},#{residence},#{name},#{phone},#{idnumber})
+    </insert>
 </mapper>
