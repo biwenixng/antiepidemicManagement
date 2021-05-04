@@ -4,7 +4,7 @@ import cn.itcast.domain.AUserRegistered;
 import cn.itcast.domain.Dormitory;
 import cn.itcast.domain.Floor;
 import cn.itcast.domain.School;
-import cn.itcast.service.impl.UserService;
+import cn.itcast.service.impl.UserLogin;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,15 +15,14 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
+
 @Controller
 @RequestMapping("/userRegisteredServlet")
 public class UserRegisteredServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Autowired
-	private UserService userService;
+	private UserLogin userLogin;
 
 	@RequestMapping("/registerNO1")
 	protected String registerNO1(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,7 +39,6 @@ public class UserRegisteredServlet extends HttpServlet {
 		request.setAttribute("name", name);
 		request.setAttribute("residence", residence);
 		request.setAttribute("phone", phone);
-		request.getRequestDispatcher("/user/user_login/user_registered2.jsp").forward(request, response);
 		return "/user/user_login/user_registered2";
 	}
 
@@ -49,7 +47,7 @@ public class UserRegisteredServlet extends HttpServlet {
 	protected List<School> findSchool(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
-		List<School> lists = userService.findSchool();
+		List<School> lists = userLogin.findSchool();
 		return lists;
 	}
 
@@ -59,7 +57,7 @@ public class UserRegisteredServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 		String cid = request.getParameter("cid");
-		String message = userService.userIdNumber(cid);
+		String message = userLogin.userIdNumber(cid);
 		response.getWriter().print(message);
 	}
 
@@ -70,7 +68,7 @@ public class UserRegisteredServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 		String tower = request.getParameter("tower");
-		List<Floor> lists = userService.findFloor(tower);
+		List<Floor> lists = userLogin.findFloor(tower);
 		return lists;
 	}
 
@@ -81,7 +79,7 @@ public class UserRegisteredServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 		String floor = request.getParameter("floor");
-		List<Dormitory> lists = userService.findDormitory(floor);
+		List<Dormitory> lists = userLogin.findDormitory(floor);
 		return  lists;
 	}
 
@@ -92,13 +90,12 @@ public class UserRegisteredServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 		String cphone = request.getParameter("cphone");
-		int message = userService.userPhone(cphone);
+		int message = userLogin.userPhone(cphone);
 		return message;
 	}
 
 
-	@RequestMapping("/userRegistered")
-	@ResponseBody
+	@RequestMapping(value = "/userRegistered",produces = "text/html;charset=utf8")
 	protected String userRegistered(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
@@ -117,8 +114,62 @@ public class UserRegisteredServlet extends HttpServlet {
 		//加密
 		String newpwd = DigestUtils.md5Hex(userpassword);
 		user.setPassword(newpwd);
-		String message = userService.userRegistered(user);
+		String message = userLogin.userRegistered(user);
 		request.setAttribute("message", message);
+		if(message.equals("注册成功")){
+			return "/user/user_login/user_login";
+		}else{
+			return message;
+		}
+	}
+
+	@RequestMapping("/userRegisteredUid")
+	@ResponseBody
+	protected String userRegisteredUid(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//检查用户名
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=utf-8");
+		String uid = request.getParameter("uid");
+		String message = userLogin.userRegistered(uid);
 		return message;
 	}
+//	@RequestMapping("/loginByPhone")
+//	protected synchronized void  loginByPhone(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		request.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html;charset=utf-8");
+//		String mobile = request.getParameter("sjhm");
+//		System.out.println(mobile);
+//		String yzm = request.getParameter("yzm");
+//		System.out.println(yzm);
+//		HttpSession session = request.getSession();
+//		String code = (String) session.getAttribute("code");
+//		if (userLogin.userLogin2(mobile) == 1) {
+//			if (yzm.equals(code)) {
+//				// 登录成功，拿到用户名
+//				String username = userLogin.phoneFindUserName(mobile);
+//				Cookie cookie = new Cookie("username", username);
+//				cookie.setMaxAge(60 * 60 * 2);
+//				response.addCookie(cookie);
+//				HttpSession session1 = request.getSession();
+//				for (HttpSession k : UserLoginServlet.kk) {
+//					if (username.equals(k.getAttribute("username"))) {
+//						request.setAttribute("message", "此用户已在登录状态");
+//						request.getRequestDispatcher("/user/user_login/user_login.jsp").forward(request, response);
+//						return;
+//					}
+//				}
+//				session1.setAttribute("username", username);
+//				UserLoginServlet.kk.add(session1);
+//				request.setAttribute("username",username );
+//				request.getRequestDispatcher("/web/index.jsp").forward(request, response);
+//			} else {
+//				request.setAttribute("message", "验证码不正确，请重试");
+//				request.getRequestDispatcher("/user/user_login/user_login2.jsp").forward(request, response);
+//			}
+//		}else if(userLogin.userLogin2(mobile) == 2) {
+//			request.setAttribute("message", "该用户已登录，无法重复登录!");
+//			request.getRequestDispatcher("/user/user_login/user_login2.jsp").forward(request, response);
+//
+//		}
+//	}
 }

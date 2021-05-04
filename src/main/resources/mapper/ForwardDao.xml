@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.ForwardDao">
+    <select id="queryTimeMessage" resultType="cn.itcast.domain.Forward" >
+		SELECT f.fid,a.`name` aname,d.`name` dname,appointtime,appointmenttime,f.phone
+		FROM a_forward f
+		INNER JOIN a_user a
+		ON f.auser = a.username
+		INNER JOIN d_user d
+		ON d.username = f.duser
+		WHERE d.username = #{doctorName} and f.show=1 and appointmenttime LIKE #{link}
+	</select>
+
+    <select id="queryForwardAll" resultType="cn.itcast.domain.Forward" >
+		SELECT f.fid,a.`name` as auser,d.`name` as duser,appointtime,appointmenttime,f.phone FROM a_forward f
+		INNER JOIN a_user a
+		ON f.auser = a.username
+		INNER JOIN d_user d
+		ON d.username = f.duser
+		WHERE d.username = #{doctorName} and f.show=1
+	</select>
+</mapper>

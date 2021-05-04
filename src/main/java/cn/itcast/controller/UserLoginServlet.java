@@ -1,7 +1,7 @@
 package cn.itcast.controller;
 
 import cn.itcast.domain.AUserLogin;
-import cn.itcast.service.impl.UserService;
+import cn.itcast.service.impl.UserLogin;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/userLoginServlet")
 public class UserLoginServlet extends HttpServlet {
 	@Autowired
-	private UserService service;
+	private UserLogin service;
 
 	private static final long serialVersionUID = 1L;
 	public static List<HttpSession> kk = new ArrayList<HttpSession>();
@@ -33,6 +33,11 @@ public class UserLoginServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		String uid = request.getParameter("uid");
 		String pwd = request.getParameter("pwd");
+		if(uid == null && pwd == null){
+			HttpSession session = request.getSession();
+			uid = (String) session.getAttribute("username");
+			pwd = (String) session.getAttribute("password");
+		}
 		String npwd ;
 		if(pwd.length()==32) {
 			npwd = pwd;
@@ -64,7 +69,6 @@ public class UserLoginServlet extends HttpServlet {
 				response.addCookie(cookie2);
 			}
 			HttpSession session = request.getSession();
-//			session.setMaxInactiveInterval(60);
 //			for (HttpSession k : kk) {
 //				if (uid.equals(k.getAttribute("username"))) {
 //					request.setAttribute("message", "此用户已在登录状态");
@@ -73,13 +77,12 @@ public class UserLoginServlet extends HttpServlet {
 //				}
 //			}
 			session.setAttribute("username", uid);
+			session.setAttribute("password",npwd );
 			kk.add(session);
 			request.setAttribute("username",uid );
-//			request.getRequestDispatcher("/web/index.jsp").forward(request, response);
 			return "index";
 		} else {
 			request.setAttribute("message", message);
-//			request.getRequestDispatcher("/user/user_login/user_login.jsp").forward(request, response);
 			return "user/user_login/user_login";
 		}
 	}

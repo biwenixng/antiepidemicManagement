@@ -1,18 +1,15 @@
 package cn.itcast.service.impl;
 
-import cn.itcast.dao.UserDao;
+import cn.itcast.dao.UserLoginDao;
 import cn.itcast.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
-import java.sql.Connection;
 import java.util.List;
 
 @Service("userService")
-public class UserService {
+public class UserLogin {
     @Autowired
-	private UserDao userDao;
+	private UserLoginDao userDao;
 		public String userLogin(AUserLogin newLogin) {
 			AUserLogin login = userDao.userLogin(newLogin);
 			if(login==null){
@@ -22,15 +19,15 @@ public class UserService {
 			}
 		}
 	    //10 09
-		public int userLogin2(String phone) {
-			List<AUserLogin2> login = userDao.userLogin2();
-			for (AUserLogin2 ln : login) {
-				if (ln.getPhone().equals(phone)) {
-					return 1;
-				}
-			}
-			return 0;
-		}
+//		public int userLogin2(String phone) {
+//			List<AUserLogin2> login = userDao.userLogin2();
+//			for (AUserLogin2 ln : login) {
+//				if (ln.getPhone().equals(phone)) {
+//					return 1;
+//				}
+//			}
+//			return 0;
+//		}
 	//用户登录(手机登录，通过手机号码拿到用户名)
 		public String phoneFindUserName(String phone) {
 			AUserLogin aUserLogin = new AUserLogin();
@@ -43,24 +40,17 @@ public class UserService {
 		}
 
 
-		//10 09
+
 		public String doctorLogin(DUserLogin newLogin) {
-			List<DUserLogin> login = userDao.doctorLogin();
-			for (DUserLogin ln : login) {
-				if (ln.getUsername().equals(newLogin.getUsername())) {
-					if (ln.getShow().equals("1")) {
-						if (ln.getPassword().equals(newLogin.getPassword())) {
-							
-							return "登录成功";
-						} else {
-							return "密码错误";
-						}
-					} else {
-						return "该账户被冻结";
-					}
-				}
+			DUserLogin login = userDao.doctorLogin(newLogin);
+			if(login == null){
+				return "账号或密码错误";
+			}else if(login.getShow().equals(0)){
+				return "该账户被冻结";
+			}else{
+				return "登录成功";
 			}
-			return "该用户不存在,请重新核对用户名及密码";
+
 		}
 
 		//10 09
@@ -123,7 +113,7 @@ public class UserService {
 		if(login != null){
 			return "该用户名已存在!";
 		}
-		return "可用";
+		return "成功注册";
 		
 	}
 
@@ -151,10 +141,10 @@ public class UserService {
 
 	 public String userRegistered(AUserRegistered user) {
 		 int number = userDao.userRegistered(user);
-		 if(number!=0) {
+		 if(number == 0) {
 			 return "该用户已存在";
 		 }else {
-			 return "可用";
+			 return "注册成功";
 		 }
 	 }
 
@@ -183,11 +173,14 @@ public class UserService {
 		
 	}
 
-	public String getName(Connection con, String name) {
+	public String getName(String name) {
 		return userDao.getName(name);
 	}
-	public boolean forWord(Connection conn,Forward forward) {
+	public int forWord(Forward forward) {
 		return userDao.forWord(forward);
 	}
 
+	public AUserLogin getUser(AUserLogin newLogin){
+	   return userDao.userLogin(newLogin);
+	}
 }

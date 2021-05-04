@@ -77,9 +77,9 @@
             <div id="navbar" class="navbar-collapse collapse ">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">防疫专区</a></li>
-                    <li class="active"><a href="#">预约看病</a></li>
-                    <li class="active"><a href="#">防疫商城</a></li>
-                    <li class="active"><a href="#">个人中心</a></li>
+                    <li><a href="<c:url value="/doctor/query_doctor.jsp"/>">预约看病</a></li>
+                    <li><a href="<c:url value="/shop/look_shopping.jsp"/>">防疫商城</a></li>
+                    <li><a href="<c:url value="/personalCenter/myCenter.jsp"/>">个人中心</a></li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

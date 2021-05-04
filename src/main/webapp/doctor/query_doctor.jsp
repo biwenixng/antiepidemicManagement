@@ -19,6 +19,10 @@
 <script type="text/javascript"
 	src="<c:url value="/bootstrap/js/bootstrap.min.js"/>"></script>
 </head>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <body>
 	<nav class="navbar navbar-inverse">
 		<div class="container">
@@ -50,21 +54,21 @@
 </body>
 <script type="text/javascript">
 	$.get({
-		"url" : "<c:url value='/doctor/doctorServlet?method=queryDoctor'/>",
+		"url" : "<%=basePath%>doctorServlet/queryDoctor",
 		"data" : null,
 		"dataType" : "json",
 		"success" : function(data) {
 			for (var i = 0; i < data.length; i++) {
 				var $div = $("<div class='col-md-3 col-sm-6'></div>");
 				var $twodiv = $("<div class='person'></div>");
-				var $imgPath = "/Zxiangmu/" + data[i].imgPath;
+				var $imgPath = "/antiepidemic_war/" + data[i].imgPath;
 				var $img = $("<img src=\"<c:url value='\"+$imgPath+\"'/>\" alt='' class='img-responsive'/>");
 				var $threediv = $("<div class='person-content'></div>");
 				var $name = $("<h4></h4>");
 				$name.text(data[i].name);
 				var $p = $("<p></p>");
 				$p.text(data[i].synopsis);
-				var $a = $("<a class='btn btn-default' href=\"<c:url value='/doctor/doctorServlet?method=subScribe&username=\"+data[i].userName+\"&name=\"+data[i].name+\"'/>\" role='button'>预约</a>");
+				var $a = $("<a class='btn btn-default' href=\"<c:url value='../doctorServlet/subScribe?username=\"+data[i].userName+\"&name=\"+data[i].name+\"'/>\" role='button'>预约</a>");
 
 				$threediv.append($name);
 				$threediv.append($p);

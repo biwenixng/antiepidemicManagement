@@ -22,16 +22,20 @@
 </head>
 <body>
 <%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%
 if ((String)request.getAttribute("msg") == "success") {%>
-    <script>
-    alert("预约成功"); 
-    </script>
+<script>
+alert("预约成功");
+ </script>
 <%}%>
 <%
 if ((String)request.getAttribute("msg") == "error") {%>
-    <script>
-    alert("预约成功"); 
-    </script>
+<script>
+alert("预约成功");
+ </script>
 <%}%>
 	<nav class="navbar navbar-inverse">
 		<div class="container">
@@ -53,7 +57,7 @@ if ((String)request.getAttribute("msg") == "error") {%>
 		</div>
 		<div class="row jumbotron">
 			<div class="left col-lg-5">
-				<form action="<c:url value="/doctor/doctorServlet"/>" method="get">
+				<form action="<%=basePath%>doctorServlet/appointment" method="get">
 					<div id="forwardForm">
 						<div class="form-group">
 							<input type="hidden" class="form-control" name="method" id="method" value="appointment">
@@ -67,17 +71,17 @@ if ((String)request.getAttribute("msg") == "error") {%>
 						</div>
 
 						<div class="form-group">
-							<input type="hidden" class="form-control" id="patientUser" name="patientUser" value="${user}">
+							<input type="hidden" class="form-control" id="patientUser" name="patientUser" value="${user.username}">
 						</div>
 
 						<div class="form-group">
 							<label for="patientName">病人姓名</label> <input type="text"
-								class="form-control" id="uidName" readonly="readonly" name="name" value="${name2}">
+								class="form-control" id="uidName" readonly="readonly" name="name" value="${user.name}">
 						</div>
 
 						<div class="form-group">
 							<label for="userPhone">电话</label> <span></span> <input
-								type="text" class="form-control" name="phone" id="userPhone">
+								type="text" class="form-control" name="phone" id="userPhone" value="${user.phone}">
 						</div>
 
 						<div class="form-group">

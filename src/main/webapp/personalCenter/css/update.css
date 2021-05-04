@@ -1,0 +1,35 @@
+	.update {
+	width: 450px;
+	height: 450px;
+	margin: 100px auto;
+	text-align: center;
+}
+.lb{
+	float: left;
+	margin-top: 4px;
+}
+.lbyzm{
+	float: left;
+	margin-left: 30px;
+	margin-top: 4px
+}
+
+#next{
+	margin: 0px 0px;
+}
+.form-control{
+	display: inline;
+	margin-left: -80px;
+}
+.form-group{
+	margin-bottom: 45px;
+	padding-left: 80px;
+}
+#yzm{
+	margin-left: -35px;
+	
+}
+#btnYZM{
+	width: 80px;
+	padding: 4px;
+}

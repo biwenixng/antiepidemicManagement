@@ -1,0 +1,16 @@
+.info_center{
+	margin: 20px 0px 0px 0px;
+	border-radius: 10px ; 
+}
+.info_center table tr td{
+	font-size: 14px;
+	vertical-align: initial;
+	padding: 5.55px 10px 17px 20px;  
+}
+.infomain{
+	height: 600px;
+	width: 600px;
+	margin: 0px auto;
+	padding-left: 100px;
+	padding-top: 40px;
+}

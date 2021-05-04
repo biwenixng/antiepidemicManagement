@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+#dv{
+	background-color: #adadad;
+	height: 650px;
+	margin: 10px;
+	border-radius: 10px 10px;
+	
+}
+.all{
+	color: #444444;
+    height: 60px;
+    line-height: 60px;
+    vertical-align: middle;
+    font-size:25px;
+    margin: 20px 10px 0px 10px;
+    padding: 0px 0px 0px 15px;
+    display: block;
+}
+.st{
+	background-color: #adadad;
+	
+	padding-bottom: 0px;
+}
+.st a:link{
+          text-decoration: none;
+}
+.st a:visited{
+          text-decoration: none;
+}
+

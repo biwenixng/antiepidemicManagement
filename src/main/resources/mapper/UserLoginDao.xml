@@ -2,14 +2,14 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.itcast.dao.UserDao">
-    <insert id="forWord">
+<mapper namespace="cn.itcast.dao.UserLoginDao">
+    <insert id="forWord" parameterType="cn.itcast.domain.Forward">
         INSERT INTO a_forward (duser,auser,appointtime,appointmenttime,phone)
-        VALUES(#{duser},#{auser},#{appointtime},#{appointmenttime},#{phone})
+        VALUES(#{duser},#{auser},#{appointTime},#{appointmentTime},#{phone})
     </insert>
 
     <select id="userLogin" parameterType="cn.itcast.domain.AUserLogin" resultType="cn.itcast.domain.AUserLogin">
-        SELECT username,password,idnumber,phone
+        SELECT username,password,idnumber,phone,name
         FROM a_user
         <where>
             <if test="username != null and username != ''">
@@ -45,7 +45,20 @@
     </select>
 
     <insert id="userRegistered" parameterType="cn.itcast.domain.AUser">
-       INSERT INTO a_user(`username`,`password`,`residence`,`name`,`phone`,`idnumber`)
+       INSERT INTO a_user
+       (username,password,residence,name,phone,idnumber)
 	   values(#{username},#{password},#{residence},#{name},#{phone},#{idnumber})
     </insert>
+
+    <select id="getName" resultType="String">
+       SELECT name
+       FROM a_user
+       WHERE username = #{name}
+    </select>
+
+    <select id="doctorLogin"  parameterType="cn.itcast.domain.DUserLogin"  resultType="cn.itcast.domain.DUserLogin">
+      SELECT `username`,`password`,`show`
+      FROM d_user
+      WHERE username = #{username} and password = #{password}
+    </select>
 </mapper>

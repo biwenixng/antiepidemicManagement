@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.DoctorDao">
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <select id="queryDoctorAll" resultType="cn.itcast.domain.Doctor">
+		SELECT *
+		FROM d_user
+	</select>
+</mapper>

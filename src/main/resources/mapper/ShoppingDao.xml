@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.ShoppingsDao">
+    <select id="selectAll_online" resultType="cn.itcast.domain.Shoponline">
+         SELECT `cid`,`commodityname`,`price`,`inventory`,`usename`,`synopsis`,`productname`,`shoppingimg`,`weight`,`specialname`,`show`
+         FROM `a_commodity` acom
+         INNER JOIN `a_use` ause
+         ON acom.use = ause.useid
+         INNER JOIN `a_classify`  aclass
+         ON acom.classify = aclass.productid
+         INNER JOIN `a_special` aspe
+         ON acom.special = aspe.special
+	</select>
+
+     <select id="selectInfo" resultType="cn.itcast.domain.Shoponline">
+         SELECT `cid`,`commodityname`,`price`,`inventory`,`usename`,`synopsis`,`productname`,`shoppingimg`,`weight`,`specialname`,`show`
+         FROM `a_commodity` acom
+         INNER JOIN `a_use` ause
+         ON acom.use = ause.useid
+         INNER JOIN `a_classify`  aclass
+         ON acom.classify = aclass.productid
+         INNER JOIN `a_special` aspe
+         ON acom.special = aspe.special
+         WHERE  cid =  #{cid}
+	 </select>
+</mapper>

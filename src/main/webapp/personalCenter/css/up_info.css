@@ -1,0 +1,28 @@
+.upload_info_center{
+	margin: 24px 0px 0px 0px;
+	
+	border-radius: 10px ; 
+}
+.upload_info_center table tr td{
+	font-size: 14px;
+	vertical-align: initial;
+	padding: 5.55px 10px 20px 20px;  
+	
+}
+.slt .p2 label{
+	margin: 0px 9px 0px 0px;
+	
+}
+.form-group p1 {
+	margin: 0px 0px 0px 0px;
+}
+
+#btn-sb{
+	margin: 25px 0px 25px 100px;
+}
+.form-inline{
+	padding: 50px 0px 0px 50px;
+}
+.p1{
+	margin: 20px;
+}

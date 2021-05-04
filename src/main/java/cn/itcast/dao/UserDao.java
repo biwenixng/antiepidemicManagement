@@ -1,61 +1,65 @@
 package cn.itcast.dao;
 
-import cn.itcast.domain.*;
-import org.apache.ibatis.annotations.Param;
+import cn.itcast.domain.AUserRegistered;
+import cn.itcast.domain.Message;
+import cn.itcast.domain.Site;
+import cn.itcast.domain.User;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
 import java.util.List;
 
-/**
- * @author 毕文星
- */
+
 @Repository
 public interface UserDao {
-    /**
-     *
-     * @param forward
-     * @return
-     */
-    public boolean forWord(@Param("forward")Forward forward);
-
-    /**
-     * 查询用户账号信息
-     * @param aUserLogin
-     * @return
-     */
-    public AUserLogin userLogin(AUserLogin aUserLogin);
-    public String getName(String name);
-    public List<AUserLogin2> userLogin2();
-    public List<DUserLogin> doctorLogin();
-    public List<MUserLogin> adminLogin();
-
-    /**
-     * 获取校区
-     * @return
-     */
-    public List<School> findSchool();
-
-    /**
-     * 获取楼
-     * @param schoolname
-     * @return
-     */
-    public List<Floor> findFloor(@Param("schoolname") String schoolname);
-
-    /**
-     * 获取寝室
-     * @param floorname
-     * @return
-     */
-    public List<Dormitory> findDormitory(@Param("floorname") String floorname);
-
-    /**
-     * 注册
-     * @param user
-     * @return
-     */
-    public int userRegistered(AUserRegistered user);
-    public List<AUserRegistered> userFindPassword1();
-    public int userFindPassword2(String phone, String pwd);
+	
+	/**
+	 * @param username
+	 * @return
+	 *	用户名查用户状态信息
+	 */
+	public User selectByUsername(String username);
+		
+	/**
+	 * 	上传用户信息
+	 */
+	public boolean uploadInfo(Message msg);
+	
+	/**
+	 * 改（更新）积分（上传+20积分）和健康状态
+	 */
+	public void updateJfHealth(User user);   
+	
+	/**
+	 * @return
+	 *	查询地点
+	 */
+	public List<Site> selectSiteAll();
+	
+	
+	/**
+	 * 修改密码
+	 */
+	public void updatePasssword(String username,String newpsw);
+	
+	/**
+	 * 修改电话号码
+	 */
+	public void updatePhone(String username,String newPhone);
+	
+	/**
+	 * @param phone
+	 * @return 查找结果
+	 */
+	public int selectPhone(String phone);
+	
+	/**
+	 * 用户结果集
+	 */
+	public List<AUserRegistered> userFindPhone();
+	
+	/**
+	 * 查询原密码
+	 */
+	public String selectPSW(String username);
+	
 }

@@ -1,0 +1,40 @@
+@charset "UTF-8";
+.bo{
+	background-color: #069dd5;
+	color: black;
+	border-radius: 5px;
+	margin-left: 15px;
+	margin-top: 10px;
+}
+.sp1{
+	color: #6ABB78;
+	font-size: 25px;
+	font-weight: bold;
+	margin-left: 15px;
+	margin-bottom: 10px
+}
+.ip2{
+	color: #adadad;
+	margin: 0px 0px 0px 15px;
+	padding: 0px;
+	font-weight: 400px;
+	margin-bottom: 10px
+}
+.ip1{
+	margin-left: 15px;
+	margin-bottom: 10px
+}
+.dv1{
+	background-color: #a6e1ec;
+	margin: 10px 10px 10px 10px;
+	border-radius: 5px;
+	height: 600px;
+	border: 1px solid black;
+}
+.dv2{
+	background-color: #d9edf7;
+	margin: 10px 0px 0px 10px;
+	padding-bottom: 5px;
+	border-radius: 5px;
+	width: 300px;
+}

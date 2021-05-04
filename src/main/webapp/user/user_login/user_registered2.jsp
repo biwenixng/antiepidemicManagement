@@ -47,7 +47,7 @@
 				<hr />
 				
 				<form
-					action="<%=application.getContextPath()%>/UserRegistered2Servlet"
+					action="<%=basePath%>userRegisteredServlet/userRegistered"
 					method="post">
 					<!-- 隐藏表单域 -->
 					<input type="hidden" name="idnumber"  value="${requestScope.idnumber}"/>
@@ -71,11 +71,6 @@
 						<input type="submit" class="xiayibu" id="zc" value="确认注册"/>
 					</div>
 				</form>
-				<!-- 注册提示 -->
-					<c:if test="${not empty requestScope.message}">
-					   <span class="ts" style="font-family:'黑体';color:red;font-size: 30px">${requestScope.message}</span>
-					   <span><a href="<c:url value="/user/user_login/user_login.jsp"/>">前往登录</a></span>
-					</c:if>
 			</div>
 		</div>
 	</div>
@@ -90,7 +85,7 @@
 			return;
 		}else if(uid){
 			$.post({
-				"url" : "<c:url value='/UserRegisteredAjax2Servlet'/>",
+				"url" : "<%=basePath%>userRegisteredServlet/userRegisteredUid",
 				"data" : "uid=" + $("#uid").val(),
 				"dataType" : "text",
 				"success" : function(data) {
