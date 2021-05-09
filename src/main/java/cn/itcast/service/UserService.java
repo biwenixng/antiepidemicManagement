@@ -21,7 +21,7 @@ public interface UserService {
 	 * 	上传用户信息
 	 * @return 返回是否修改成功
 	 */
-	public boolean uploadInfo(Message msg);
+	public int uploadInfo(Message msg);
 	
 	/**
 	 * 改（更新）积分（上传+20积分）和健康状态
@@ -37,7 +37,7 @@ public interface UserService {
 	/**
 	 * 修改密码
 	 */
-	public void updatePasssword(String username,String newpsw);
+	public int updatePasssword(String username,String newpsw);
 	
 	/**
 	 * 修改电话号码

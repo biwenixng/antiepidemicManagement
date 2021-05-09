@@ -17,13 +17,17 @@
 <script type="text/javascript"
 	src='<c:url value='/personalCenter/js/bootstrap.js'/>'></script>
 </head>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <body>
 	<div class="page-header" id="new"
 		style="margin: 0px 15px 0px 15px; padding: 0px;">
 		<h2 style="color: #DDDDDD">修改住址</h2>
 		<a href='<c:url value='/personalCenter/modify_personal_message.jsp'/>' style="display: inline-block;font-size: 18px;font-weight: bold; margin-left: 550px;">返回</a>
 	</div>
-	<form action='<c:url value='/AreaSer?method=update&username=${username}'/>'
+	<form action="../areaSer/update"
 		method="post">
 		<c:if test="${not empty msg}">
 					<p
@@ -56,14 +60,14 @@ $(document).ready(function () {
     }); 
     function getprovince(){//使用ajax获取后台返回的数据
     	 $.get({
-             "url":"<c:url value='/AreaSer'/>",
-             "data": "method=selectAll",
+             "url":"<%=basePath%>userRegisteredServlet/findSchool",
+             "data": null,
              "dataType":"json",
              "success": function(data){
            	  if(data != "null"){
            		 for(var i = 0 ; i <  data.length ; i++){
                   	 var  obj = data[i];
-                        var  $option = $("<option>"+obj.name+"</option>");
+                        var  $option = $("<option>"+obj.schoolname+"</option>");
                        $("#province").append($option);
                    }
            	  }               
@@ -73,14 +77,14 @@ $(document).ready(function () {
        function getcity(name){
             $("#city").empty();//清空之前的数据
             $.get({
-                "url":"<c:url value='/AreaSer'/>",
-                "data": "method=selectOne&schoolname="+name,
+                "url":"<%=basePath%>userRegisteredServlet/findFloor",
+                "data": "tower="+name,
                 "dataType":"json",
                 "success": function(data){
               	  if(data != "null"){
               		 for(var i = 0 ; i <  data.length ; i++){
                      	 var  obj = data[i];
-                           var  $option = $("<option>"+obj.name+"</option>");
+                           var  $option = $("<option>"+obj.floorname+"</option>");
                           $("#city").append($option);
                       }
               	  }               
@@ -90,14 +94,14 @@ $(document).ready(function () {
     function getarea(name){
     	$("#area").empty();
     	 $.get({
-             "url":"<c:url value='/AreaSer'/>",
-             "data": "method=selectAllPage&floorname="+name,
+             "url":"<%=basePath%>userRegisteredServlet/findDormitory",
+             "data": "floor="+name,
              "dataType":"json",
              "success": function(data){
            	  if(data != "null"){
            		 for(var i = 0 ; i <  data.length ; i++){
                   	 var  obj = data[i];
-                        var  $option = $("<option>"+obj.name+"</option>");
+                        var  $option = $("<option>"+obj.dormitoryname+"</option>");
                        $("#area").append($option);
                    }
            	  }               

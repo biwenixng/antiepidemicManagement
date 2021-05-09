@@ -13,18 +13,22 @@
 <script type="text/javascript"
 	src="<c:url value="/bootstrap/js/bootstrap.min.js"/>"></script>
 </head>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <body>
 <%
 if ((String)request.getAttribute("msg") == "error") {%>
-    <script>
-    alert("请输入商品名称之后再查询!"); 
-    </script>
+ <script>
+ alert("请输入商品名称之后再查询!");
+  </script>
 <%}%>
 <%
 if ((String)request.getAttribute("msg") == "warning") {%>
-    <script>
-    alert("请输入正确的商品名称!"); 
-    </script>
+ <script>
+ alert("请输入正确的商品名称!");
+  </script>
 <%}%>
 	<div class="container-fluid">
 		<div class="jumbotron">
@@ -71,13 +75,13 @@ if ((String)request.getAttribute("msg") == "warning") {%>
 </body>
 <script type="text/javascript">
 	$.get({
-		"url":"<c:url value='/doctor/doctorServlet?method=showCommodity&currentPage=1&pageTotal=1'/>",
-		"data":null,
+		"url":"<%=basePath%>doctorServlet/showCommodity",
+		"data":"currentPage=1&pageTotal=1",
 		"dataType":"json",
 		"success":function(data){
 			for(var i = 0;i < data.pages.length;i ++) {
 				var $tr = $("<tr></tr>");
-				var $shoppingImg = "/Zxiangmu/" + data.pages[i].shoppingImg;
+				var $shoppingImg = "/antiepidemic_war/" + data.pages[i].shoppingImg;
 				var $shoppingImg = $("<td><img alt='' src=\"<c:url value='\"+$shoppingImg+\"'/>\" width='70' height='50'></td>")
 				var $commodityName = $("<td>"+data.pages[i].commodityName+"</td>");
 				var $synopsis = $("<td>"+data.pages[i].synopsis+"</td>");

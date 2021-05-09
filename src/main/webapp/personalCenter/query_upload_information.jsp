@@ -16,6 +16,10 @@
 <script type="text/javascript"
 	src='<c:url value='/personalCenter/js/bootstrap.js'/>'></script>
 </head>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!-- 查看上传记录 -->
 <body>
 	<div class="page-header"
@@ -39,8 +43,8 @@
 <script type="text/javascript">
      $(document).ready(function(){
             $.get({
-              "url":"<c:url value='/MyCenter'/>",
-              "data": "method=selectAll&username=${username}&pageCount=1&currentPage=1",
+              "url":"<%=basePath%>myCenter/selectAll",
+              "data": "username=${username}&pageCount=3&currentPage=1",
               "dataType":"json",
               "success": function(data){
             	  
@@ -76,7 +80,7 @@
 
                      if(data.currentPage != start ){
  			         var $fost =$(" <li>"
-         	              +"<a href='<c:url value='/MyCenter?method=selectAllPage&username=${username}&pageCount=1&currentPage="+(data.currentPage-1)+"'/>' aria-label='Previous'>"
+         	              +"<a href='<c:url value='../myCenter/selectAllPage?username=${username}&pageCount=3&currentPage="+(data.currentPage-1)+"'/>' aria-label='Previous'>"
          	              +"<span aria-hidden='true'>&laquo;</span>"
          	              +"</a>"
          	              +"</li>")
@@ -85,16 +89,16 @@
                      //遍历输出页码
                      for(var i = start ; i <= end; i++){
                          if(i == data.currentPage){
-                             var $li= $("<li><a href='<c:url value='/MyCenter?method=selectAllPage&username=${username}&pageCount=1&currentPage="+i+"'/>' style='background-color: blue;color: white;'>"+i+"</a></li>");    
+                             var $li= $("<li><a href='<c:url value='../myCenter/selectAllPage?username=${username}&pageCount=3&currentPage="+i+"'/>' style='background-color: blue;color: white;'>"+i+"</a></li>");
                     	     $(".pagination").append($li);
                     	     }else{
-                         var $li= $("<li><a href='<c:url value='/MyCenter?method=selectAllPage&username=${username}&pageCount=1&currentPage="+i+"'/>'>"+i+"</a></li>");    
+                         var $li= $("<li><a href='<c:url value='../myCenter/selectAllPage?username=${username}&pageCount=3&currentPage="+i+"'/>'>"+i+"</a></li>");
                     	 $(".pagination").append($li);
                     	     } 
                      } 
                      if(data.currentPage != end ){ 
                      var $last =$(" <li>"
-               	          +"<a href='<c:url value='/MyCenter?method=selectAllPage&username=${username}&pageCount=1&currentPage="+(data.currentPage+1)+"'/>' aria-label='Next'>"
+               	          +"<a href='<c:url value='../myCenter/selectAllPage?username=${username}&pageCount=3&currentPage="+(data.currentPage+1)+"'/>' aria-label='Next'>"
                	          +"<span aria-hidden='true'>&raquo;</span>"
                	          +"</a>"
                	          +"</li>")

@@ -59,7 +59,7 @@
 				var $appointmentTime = $("<td>"+data[i].appointmentTime+"</td>");
 				var $appointTime = $("<td>"+data[i].appointTime+"</td>");
 				var $phone = $("<td>"+data[i].phone+"</td>");
-				var $a = $("<td><a class=\"btn btn-danger\" href=\"<c:url value='/doctor/doctorServlet?method=removeReservation&fid=\"+data[i].fid+\"&show=0'/>\" role='button'>删除</a></td>")
+				var $a = $("<td><a class=\"btn btn-danger\" href=\"<c:url value='../doctorServlet/removeReservation?fid=\"+data[i].fid+\"&show=0'/>\" role='button'>删除</a></td>")
 
 				$tr.append($auser);
 				$tr.append($appointmentTime);

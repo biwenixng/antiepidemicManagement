@@ -16,11 +16,11 @@
 </head>
 <body>
 	<%
-		if ((String) request.getAttribute("message") == "error") {
+		if (request.getAttribute("message") == "error") {
 	%>
-	    
+
 	<script>
-		    alert("今天暂无预约消息！");
+		alert("今天暂无预约消息！");
 	</script>
 	<%
 		}
@@ -50,7 +50,7 @@
 										<td>${item.appointTime}</td>
 										<td>${item.phone}</td>
 										<td><a class="btn btn-danger"
-											href="<c:url value='/doctor/doctorServlet?method=removeReservation&fid=${item.fid}&show=0'/>"
+											href="<c:url value='../doctorServlet/removeReservation?fid=${item.fid}&show=0'/>"
 											role='button'>删除</a></td>
 									</tr>
 								</c:forEach>

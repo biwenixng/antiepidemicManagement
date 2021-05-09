@@ -17,7 +17,10 @@
 <script type="text/javascript"
 	src='<c:url value='/personalCenter/js/bootstrap.js'/>'></script>
 </head>
-
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!-- 查看个人信息 -->
 <body>
 
@@ -101,18 +104,19 @@
 	</div>
 	
 </body>
+
 <script type="text/javascript">
 $(document).ready(function(){
 	$.get({
-		 "url":"<c:url value='/UserServlet'/>",
-         "data": "method=selectByUsername&user=${username}",
+		 "url":"<%=basePath%>userServlet/selectByUsername",
+         "data": null,
          "dataType":"json",
          "success": function(data){
-        	 var imimg = "/Zxiangmu"+data.HeadImg;
+        	 var imimg = "/antiepidemic_war"+data.headImg;
         	 $("#imgad").attr('src',<c:url value='imimg'/>);
-        		$("#name").val(data.Name);
+        		$("#name").val(data.name);
         		$("#state").html(function(){
-        			var state = data.Health;
+        			var state = data.health;
         			if(state == 1){
         				state = '健康';}
         			if(state == 0){
@@ -122,10 +126,10 @@ $(document).ready(function(){
         			$("#state").val(state);
         			});
     			// 电话身份证号隐私显示
-    			var pho = data.Phone;
+    			var pho = data.phone;
     			pho = pho.substring(0, 3) + "*****" + pho.substring(8, 11);
     			
-    			var idn = data.Idnumber
+    			var idn = data.idnumber
 				idn = idn.substring(0, 5) + "*********" + idn.substring(14, 18);
     			
         		//$("#phone").val(data.Phone);
@@ -133,7 +137,7 @@ $(document).ready(function(){
         		//$("#Idcard").val(data.Idnumber);
         		$("#Idcard").val(idn);
         		$("#Jifen").val(data.integral);
-        		$("#address").val(data.Residence);
+        		$("#address").val(data.residence);
 		},
 	
 

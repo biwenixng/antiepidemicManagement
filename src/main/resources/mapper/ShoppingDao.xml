@@ -25,4 +25,34 @@
          ON acom.special = aspe.special
          WHERE  cid =  #{cid}
 	 </select>
+
+    <select id="selectLike" resultType="cn.itcast.domain.Shopselect">
+      SELECT `cid`,`commodityname`,`price`,`inventory`,`usename`,`synopsis`,`productname`,`shoppingimg`,`weight`,`specialname`,`show`
+         FROM `a_commodity` acom
+         INNER JOIN `a_use` ause
+         ON acom.use = ause.useid
+         INNER JOIN `a_classify`  aclass
+         ON acom.classify = aclass.productid
+         INNER JOIN `a_special` aspe
+         ON acom.special = aspe.special
+         WHERE  synopsis  like '%${synopsis}%'
+    </select>
+
+    <insert id="a_orderadd">
+        INSERT INTO `a_order` (`ordernumber`,`username`,`ordertime`,`coupon`,`actualamount`,
+		`totalmoney`,`totalquantity`,`paystatus`,`distribution`,
+		`address`,`phone`,`show`)
+		VALUES(#{orderNumber},#{userName},#{orderTime},#{coupon},#{actualAmount},#{totalMoney},#{totalQuantity},'1',#{distribution},#{address},#{phone},1)
+    </insert>
+
+    <insert id="b_orderadd">
+      INSERT INTO `a_orders`(`ordernumber`,`cid`,`number`,`picture`)
+	  VALUES(#{orderNumber},#{cid},#{number},#{picture})
+    </insert>
+
+    <update id="update">
+        UPDATE `a_commodity` 
+        SET `inventory` = #{inventory}
+		WHERE `cid` = #{cid}
+    </update>
 </mapper>

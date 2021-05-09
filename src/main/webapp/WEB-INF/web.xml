@@ -46,4 +46,9 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
+  <init-param>
+    <!-- 图片要想上传成功，需要添加readonly选项，它的值设置成为：false -->
+    <param-name>readonly</param-name>
+    <param-value>false</param-value>
+  </init-param>
 </web-app>

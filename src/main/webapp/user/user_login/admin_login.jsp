@@ -26,6 +26,10 @@
 </script>
 <link type="text/css" rel="stylesheet" href="<c:url value="/user/user_css/admin_login.css"/>" />
 </head>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <body>
 
     <div class="login">
@@ -35,7 +39,7 @@
            <c:if test="${not empty requestScope.message}">
 				<span class="ts" style="font-family:'黑体';color:red;font-size: 15px">${requestScope.message}</span>
 		   </c:if>
-            <form action="<%=application.getContextPath()%>/AdminLoginServlet" method="post">
+            <form action="<%=basePath%>adminLoginServlet/adminLogin" method="post">
                 <div class="inputLi">
                     <input type="text" name="user" id="user" placeholder="请输入管理员名" required>
                 </div>

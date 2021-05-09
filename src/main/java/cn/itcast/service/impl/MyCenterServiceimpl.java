@@ -22,6 +22,12 @@ public class MyCenterServiceimpl implements MyCenterService {
 		// TODO Auto-generated method stub
 		return dao.selectQueryUploadInformation(username,page);
 	}
+
+	@Override
+	public List<QueryUploadInformation> selectQueryUploadInformationPage(String username,int limit,int offset) {
+		return dao.selectQueryUploadInformationPage(username,limit,offset);
+	}
+
 	/**
 	    * @return
 	    * -查询预约记录
@@ -31,15 +37,26 @@ public class MyCenterServiceimpl implements MyCenterService {
 		// TODO Auto-generated method stub
 		return dao.selectQueryMake(auser,page);
 	}
-	
+
+	@Override
+	public List<QueryMake> selectQueryMakePage(String auser, int limit, int offset) {
+		return dao.selectQueryMakePage(auser, limit, offset);
+	}
+
 	/**
 	* @return
 	* -查询购物记录
 	*/
 	@Override
-	public List<QueryOrder> selectQueryOrder(String username, Pages<QueryOrder> page) {
+	public List<QueryOrder> selectQueryOrder(String username, int limit, int offset) {
 		// TODO Auto-generated method stub
-		return dao.selectQueryOrder(username, page);
+		return dao.selectQueryOrder(username, limit,offset);
+	}
+
+	@Override
+	public List<QueryOrder> selectQueryOrder(String username) {
+		// TODO Auto-generated method stub
+		return dao.selectQueryOrderAll(username);
 	}
 	/**
 	* @return
@@ -50,7 +67,7 @@ public class MyCenterServiceimpl implements MyCenterService {
 		// TODO Auto-generated method stub
 		return dao.selectAOrders(ordernumber, page);
 	}
-	
+
 
 	/**
 	 * @return

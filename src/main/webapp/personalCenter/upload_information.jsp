@@ -25,6 +25,10 @@
 <link type="text/css" rel="stylesheet"
 	href='<c:url value='/personalCenter/css/up_info.css'/>'>
 </head>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!-- 信息上传 -->
 <body>
 	<div class="page-header"
@@ -33,7 +37,7 @@
 	</div>
 	<div class="upload_info_center">
 	<!-- 每个form表单uname cookie 获取用户名 -->
-		<form action="<%=application.getContextPath()%>/SucessUploadInfoServlet?uname=${username}" 
+		<form action="<%=basePath%>sucessUploadInfoServlet/uploadInfo"
 			method="post" class="form-inline">
 			<div class="uploadBJ" style="width: 500px; height: 500px; margin: 0px auto; padding-left: 80px;">
 			<p>
@@ -127,8 +131,8 @@
 	});
 	function addOption(){
 		$.get({
-			"url" : "<c:url value='/UserServlet'/>",
-			"data" : "method=selectSiteAll",
+			"url" : "<%=basePath%>userServlet/selectSiteAll",
+			"data" : null,
 			"dataType" : "json",
 			"success" : function(data) {
 					var sj = [];
@@ -173,7 +177,7 @@
 	$(document).ready(function(){
 		var time = new Date();
 		var newtime = time.getHours();
-		var sjd = newtime-21;
+		var sjd = newtime-9;
 		
 		if(sjd == 0 || sjd == 1){
 			$("#btn-sb").click(function(){
@@ -195,7 +199,6 @@
 				alert("每晚21:00:00至23:00:00才可上传信息");
 				return false;	
 			});
-
 		}
 		
 	});

@@ -16,6 +16,10 @@
 <script type="text/javascript"
 	src='<c:url value='/personalCenter/js/bootstrap.js'/>'></script>
 </head>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!-- 查看预约记录 -->
 <body>
     <div class="page-header"
@@ -40,8 +44,8 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$.get({
-        "url":"<c:url value='/MyQueryMake'/>",
-        "data": "method=selectAll&auser=${username}&pageCount=1&currentPage=1",
+        "url":"<%=basePath%>myQueryMake/selectAll",
+        "data": "auser=${username}&pageCount=3&currentPage=1",
         "dataType":"json",
         "success": function(data){    	  
       	  var news = data.pages;
@@ -52,7 +56,7 @@ $(document).ready(function(){
                              "<td>"+obj.dname+"</td>"+
                              "<td>"+obj.appointmenttime+"</td>"+
                              "<td>"+obj.appointtime+"</td>"+
-                             "<td><a href='<c:url value='/MyQueryMake?method=updateAllPage&fid="+obj.fid+"&auser=${username}&pageCount=1&currentPage="+data.currentPage+"'/>'>删除</a></td>"+
+                             "<td><a href='<c:url value='../myQueryMake/updateAllPage?fid="+obj.fid+"&auser=${username}&pageCount=3&currentPage="+data.currentPage+"'/>'>删除</a></td>"+
                             +"</tr>");
                    $("#new").append($tr);
                }
@@ -77,7 +81,7 @@ $(document).ready(function(){
 
                if(data.currentPage != start ){
 		         var $fost =$(" <li>"
-   	              +"<a href='<c:url value='/MyQueryMake?method=selectAllPage&auser=${username}&pageCount=1&currentPage="+(data.currentPage-1)+"'/>' aria-label='Previous'>"
+   	              +"<a href='<c:url value='../myQueryMake/selectAllPage?auser=${username}&pageCount=3&currentPage="+(data.currentPage-1)+"'/>' aria-label='Previous'>"
    	              +"<span aria-hidden='true'>&laquo;</span>"
    	              +"</a>"
    	              +"</li>")
@@ -86,16 +90,16 @@ $(document).ready(function(){
                //遍历输出页码
                for(var i = start ; i <= end; i++){
                    if(i == data.currentPage){
-                       var $li= $("<li><a href='<c:url value='/MyQueryMake?method=selectAllPage&auser=${username}&pageCount=1&currentPage="+i+"'/>' style='background-color: blue;color: white;'>"+i+"</a></li>");    
+                       var $li= $("<li><a href='<c:url value='../myQueryMake/selectAllPage?auser=${username}&pageCount=3&currentPage="+i+"'/>' style='background-color: blue;color: white;'>"+i+"</a></li>");    
               	     $(".pagination").append($li);
               	     }else{
-                   var $li= $("<li><a href='<c:url value='/MyQueryMake?method=selectAllPage&auser=${username}&pageCount=1&currentPage="+i+"'/>'>"+i+"</a></li>");    
+                   var $li= $("<li><a href='<c:url value='../myQueryMake/selectAllPage?auser=${username}&pageCount=3&currentPage="+i+"'/>'>"+i+"</a></li>");    
               	 $(".pagination").append($li);
               	     } 
                } 
                if(data.currentPage != end ){ 
                var $last =$(" <li>"
-         	          +"<a href='<c:url value='/MyQueryMake?method=selectAllPage&auser=${username}&pageCount=1&currentPage="+(data.currentPage+1)+"'/>' aria-label='Next'>"
+         	          +"<a href='<c:url value='../myQueryMake/selectAllPage?auser=${username}&pageCount=3&currentPage="+(data.currentPage+1)+"'/>' aria-label='Next'>"
          	          +"<span aria-hidden='true'>&raquo;</span>"
          	          +"</a>"
          	          +"</li>")

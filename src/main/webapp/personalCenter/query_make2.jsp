@@ -38,7 +38,7 @@
 				                <td>${news.dname}</td>
 				                <td>${news.appointmenttime}</td>
 				                <td>${news.appointtime}</td>
-				                <td><a href='<c:url value='/MyQueryMake?method=updateAllPage&fid=${news.fid}&auser=${username}&pageCount=1&currentPage=${page.currentPage}'/>'>删除</a></td>
+				                <td><a href='<c:url value='../myQueryMake/updateAllPage?fid=${news.fid}&auser=${username}&pageCount=3&currentPage=${page.currentPage}'/>'>删除</a></td>
 				            </tr>
 				        </c:forEach>
 				    </c:if>
@@ -49,7 +49,7 @@
 				    <c:if test="${not empty page}">
 				       <c:if test="${page.currentPage != 1}">
 					   <li>
-					      <a href='<c:url value='/MyQueryMake?method=selectAllPage&auser=${username}&pageCount=1&currentPage=${page.currentPage -1}'/>' aria-label="Previous"> <span
+					      <a href='<c:url value='../myQueryMake/selectAllPage?auser=${username}&pageCount=3&currentPage=${page.currentPage -1}'/>' aria-label="Previous"> <span
 							aria-hidden="true">&laquo;</span>
 					      </a>
 					   </li>
@@ -77,17 +77,17 @@
 					        <li>
 					        <c:choose>
 					           <c:when test="${page.currentPage == index}">
-                               <a href='<c:url value='/MyQueryMake?method=selectAllPage&auser=${username}&pageCount=1&currentPage=${index}'/>' style='background-color: blue;color: white;'>${index}</a>
+                               <a href='<c:url value='../myQueryMake/selectAllPage?auser=${username}&pageCount=3&currentPage=${index}'/>' style='background-color: blue;color: white;'>${index}</a>
 					           </c:when>
 					           <c:otherwise>
-                               <a href='<c:url value='/MyQueryMake?method=selectAllPage&auser=${username}&pageCount=1&currentPage=${index}'/>'>${index}</a>
+                               <a href='<c:url value='../myQueryMake/selectAllPage?auser=${username}&pageCount=3&currentPage=${index}'/>'>${index}</a>
                                </c:otherwise>
 					        </c:choose> 
 					        </li>
 					   </c:forEach>
 					   <c:if test="${page.currentPage != end}">
 					    <li>
-					      <a href='<c:url value='/MyQueryMake?method=selectAllPage&auser=${username}&pageCount=1&currentPage=${page.currentPage +1}'/>' aria-label="Next"> <span
+					      <a href='<c:url value='../myQueryMake/selectAllPage?auser=${username}&pageCount=3&currentPage=${page.currentPage +1}'/>' aria-label="Next"> <span
 							aria-hidden="true">&raquo;</span>
 					      </a>
 					   </li>

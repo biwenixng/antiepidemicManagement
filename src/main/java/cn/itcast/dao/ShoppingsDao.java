@@ -1,6 +1,7 @@
 package cn.itcast.dao;
 
 import cn.itcast.domain.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,7 +27,12 @@ public interface ShoppingsDao {
 
 	List<Shopclass> selectClass(String productname);
 
-	List<Shopselect> selectLike(String synopsis);
+	/**
+	 * 查询商品
+	 * @param synopsis
+	 * @return
+	 */
+	List<Shopselect> selectLike(@Param("synopsis") String synopsis);
 
 	List<Shopsortpriceup> selectPriceup();
 

@@ -18,7 +18,6 @@
 <link rel="stylesheet"
 	href='<c:url value='/personalCenter/css/modify.css'/>' type="text/css">
 </head>
-
 <!-- 修改个人信息 -->
 <body>
 <div id="dv">

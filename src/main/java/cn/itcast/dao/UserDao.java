@@ -4,6 +4,7 @@ import cn.itcast.domain.AUserRegistered;
 import cn.itcast.domain.Message;
 import cn.itcast.domain.Site;
 import cn.itcast.domain.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface UserDao {
 	/**
 	 * 	上传用户信息
 	 */
-	public boolean uploadInfo(Message msg);
+	public int uploadInfo(Message msg);
 	
 	/**
 	 * 改（更新）积分（上传+20积分）和健康状态
@@ -39,7 +40,7 @@ public interface UserDao {
 	/**
 	 * 修改密码
 	 */
-	public void updatePasssword(String username,String newpsw);
+	public int updatePasssword(@Param("username") String username, @Param("newpsw") String newpsw);
 	
 	/**
 	 * 修改电话号码

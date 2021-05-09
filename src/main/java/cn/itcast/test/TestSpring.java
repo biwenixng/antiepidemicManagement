@@ -91,4 +91,5 @@ public class TestSpring {
         ForwardDao as = (ForwardDao) ac.getBean("forwardDao");
         List<Forward> queryForwardAll =  as.queryForwardAll("aaa123");
     }
+
 }

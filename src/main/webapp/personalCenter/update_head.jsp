@@ -28,7 +28,7 @@
 	</div>
 	<div class="dv1">
 		<div class="dv2">
-			<form action='<c:url value='/UpdateHead?username=${username}'/>' method="post"
+			<form action='<c:url value='../updateHead/updateHeadimg?username=${username}'/>' method="post"
 				enctype="multipart/form-data">
 				<c:if test="${not empty msg}">
 					<p

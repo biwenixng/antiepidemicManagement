@@ -199,16 +199,10 @@ public class DoctorServlet extends HttpServlet {
 	}
 
 	@RequestMapping("/showTimeMessage")
-	protected void showTimeMessage(HttpServletRequest request, HttpServletResponse response)
+	protected String showTimeMessage(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Cookie[] cookies = request.getCookies();
-		String doctorName = null;
-		for (Cookie cookie : cookies) {
-			if ("doctorname".equals(cookie.getName())) {
-				doctorName = cookie.getValue();
-				break;
-			}
-		}
+		HttpSession session = request.getSession();
+		String doctorName = (String) session.getAttribute("doctorname");
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String format = sdf.format(date);
@@ -219,35 +213,26 @@ public class DoctorServlet extends HttpServlet {
 		if (queryTimeMessage.size() == 0) {
 			request.setAttribute("message", "error");
 			request.setAttribute("msg", null);
-			request.getRequestDispatcher("/doctorindex/query_message2.jsp").forward(request, response);
-			return;
+			return "/doctorindex/query_message2";
 		}
 
 		
 		request.setAttribute("message", queryTimeMessage);
+		request.setAttribute("msg", 1);
 		request.getRequestDispatcher("/doctorindex/query_message2.jsp").forward(request, response);
+		return "/doctorindex/query_message2";
 	}
-
-	protected void removeReservation(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("/removeReservation")
+	protected String removeReservation(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String fid = request.getParameter("fid");
 		String show = request.getParameter("show");
-		
-
 		forwardService.removeReservation( show, Integer.parseInt(fid));
-
-		Cookie[] cookies = request.getCookies();
-		String doctorName = null;
-		for (Cookie cookie : cookies) {
-			if ("doctorname".equals(cookie.getName())) {
-				doctorName = cookie.getValue();
-				break;
-			}
-		}
-
-		List<Forward> queryForwardAll = forwardService.queryForwardAll( doctorName);
+		HttpSession session = request.getSession();
+		String doctorName = (String) session.getAttribute("doctorname");
+		List<Forward> queryForwardAll = forwardService.queryForwardAll(doctorName);
 		request.setAttribute("message", queryForwardAll);
-		request.getRequestDispatcher("/doctorindex/query_message2.jsp").forward(request, response);
+		return "/doctorindex/query_message2";
 	}
 
 	protected void queryDrug(HttpServletRequest request, HttpServletResponse response)
@@ -293,12 +278,13 @@ public class DoctorServlet extends HttpServlet {
 		return queryForwardAll;
 	}
 
-	protected void queryCommodityId(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("/queryCommodityId")
+	@ResponseBody
+	protected Commodity queryCommodityId(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String cid = request.getParameter("cid");
 		Commodity queryCommodity = commService.queryCommodity(Integer.parseInt(cid));
-//		String json = gson.toJson(queryCommodity);
-//		response.getWriter().print(json);
+		return queryCommodity;
 	}
 
 	protected void confirmModification(HttpServletRequest request, HttpServletResponse response)
@@ -361,7 +347,9 @@ public class DoctorServlet extends HttpServlet {
 		showCurrentPage(request, response);
 	}
 
-	protected void showCommodity(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("/showCommodity")
+	@ResponseBody
+	protected Page<Commodity> showCommodity(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<Commodity> queryCommodityAll = commService.queryCommodityAll(null);
 		Page<Commodity> page = new Page<Commodity>();
@@ -374,10 +362,9 @@ public class DoctorServlet extends HttpServlet {
 		if (pageTotal != null) {
 			page.setPageTotal(Integer.parseInt(pageTotal));
 		}
-		List<Commodity> currentList = commService.queryCommodityAll( page);
+		List<Commodity> currentList = commService.queryCommodityAll(page);
 		page.setPages(currentList);
-//		String json = gson.toJson(page);
-//		response.getWriter().println(json);
+		return page;
 	}
 
 	protected void showCurrentPage(HttpServletRequest request, HttpServletResponse response)

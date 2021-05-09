@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.UserLoginDao">
     <insert id="forWord" parameterType="cn.itcast.domain.Forward">
-        INSERT INTO a_forward (duser,auser,appointtime,appointmenttime,phone)
-        VALUES(#{duser},#{auser},#{appointTime},#{appointmentTime},#{phone})
+        INSERT INTO a_forward (duser,auser,appointtime,appointmenttime,phone,`show`)
+        VALUES(#{duser},#{auser},#{appointTime},#{appointmentTime},#{phone},1)
     </insert>
 
     <select id="userLogin" parameterType="cn.itcast.domain.AUserLogin" resultType="cn.itcast.domain.AUserLogin">
@@ -60,5 +60,10 @@
       SELECT `username`,`password`,`show`
       FROM d_user
       WHERE username = #{username} and password = #{password}
+    </select>
+
+    <select id="adminLogin" resultType="cn.itcast.domain.MUserLogin">
+        SELECT `username`,`password`, `Show`,`juisdiction`
+        FROM `m_user`
     </select>
 </mapper>

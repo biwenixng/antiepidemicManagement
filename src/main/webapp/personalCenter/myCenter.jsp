@@ -17,6 +17,10 @@
 <script type="text/javascript"
 	src='<c:url value='/personalCenter/js/bootstrap.js'/>'></script>
 </head>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <body>
 	<div class="container">
 		<div class="row">
@@ -37,7 +41,7 @@
 					<div class="collapse navbar-collapse"
 						id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li><a href='<c:url value='/web/index.jsp'/>'>首页<span class="sr-only">(current)</span></a></li>
+							<li><a href='<c:url value='/index.jsp'/>'>首页<span class="sr-only">(current)</span></a></li>
 							<li><a href='<c:url value='/shop/look_shopping.jsp'/>'>购物首页<span class="sr-only">(current)</span></a></li>
 							<li class="active"><a href="#">个人中心</a></li>
 						</ul>
@@ -46,8 +50,8 @@
 						<c:when test="${not empty username}">
            <li class="active"><a href="#">${username} <span class="sr-only">(current)</span></a></li>
                 <li>
-                
-                    <a href="<c:url value="/UserQuitServlet"/>"><!-- 返回未登录首页 -->
+
+                    <a href="<%=basePath%>userLoginServlet/logout"><!-- 返回未登录首页 -->
                         <span class="glyphicon glyphicon-lock"></span>退出登录</a>
                 </li>
             </c:when>

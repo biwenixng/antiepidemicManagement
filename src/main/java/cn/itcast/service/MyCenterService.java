@@ -1,6 +1,7 @@
 package cn.itcast.service;
 
 import cn.itcast.domain.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,16 +11,26 @@ public interface MyCenterService {
 
 	 /**
 		 * @return
-		 * -查询信息上传
+		 * -查询总信息上传
 		 */
-		List<QueryUploadInformation> selectQueryUploadInformation(String username, Pages<QueryUploadInformation> page);
-		
+	 List<QueryUploadInformation> selectQueryUploadInformation(String username, Pages<QueryUploadInformation> page);
+
+	/**
+	 * @return
+	 * -查询信息上传 分页
+	 */
+	List<QueryUploadInformation> selectQueryUploadInformationPage(String username,int limit ,int offset);
 	/**
     * @return
     * -查询预约记录
     */
 	List<QueryMake> selectQueryMake(String auser, Pages<QueryMake> page);
-	
+
+	/**
+	 * @return
+	 * -查询预约记录分页
+	 */
+	List<QueryMake> selectQueryMakePage(String auser, int limit,int offset);
 	/**
 	 * @return
 	 * -删除预约记录
@@ -30,14 +41,14 @@ public interface MyCenterService {
 	* @return
 	* -查询购物记录
 	*/
-	List<QueryOrder> selectQueryOrder(String username, Pages<QueryOrder> page);
-	
+	List<QueryOrder> selectQueryOrder(String username,int limit ,int offset);
 
+	List<QueryOrder> selectQueryOrder(String username);
 	/**
 	* @return
 	* -删除购物记录
 	*/
-	void updateQueryOrder(String ordernumber);
+	void updateQueryOrder(@Param("ordernumber") String ordernumber);
 	/**
 	* @return
 	* -查询订单详情
@@ -84,4 +95,6 @@ public interface MyCenterService {
 	* -修改住址
 	*/
 	void updatedizi(String residence,String username);
+
+
 }

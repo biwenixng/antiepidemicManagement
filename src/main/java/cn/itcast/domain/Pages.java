@@ -8,7 +8,7 @@ public class Pages<T> {
     //数据总数
     private int dataTotal;
     //每页数据量
-    private int pageCount = 1;
+    private int pageCount = 5;
     //当前页面
     private int currentPage = 1;
     //当前页的数据

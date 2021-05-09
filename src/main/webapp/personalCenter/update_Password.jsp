@@ -15,9 +15,13 @@
 <link type="text/css" rel="stylesheet" href='<c:url value='/personalCenter/css/up_info.css'/>'>
 <link type="text/css" rel="stylesheet" href='<c:url value='/personalCenter/css/update.css'/>'>
 </head>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <body>
 	<div class="update">
-		<form action="<%=application.getContextPath()%>/SucessPasswordServlet?uuname=${username}" method="post">
+		<form action="<%=basePath%>sucessPasswordServlet/updatePasssword" method="post">
 
 		<div class="form-group">
 			<label class="lb" for="exampleInputName2">请输入旧密码:</label>
@@ -54,8 +58,8 @@ $("#oldpsw").click(function(){
 	$("#oldpsw").blur(function(){
 		var inputPSW = $("#oldpsw").val();
 		var opsw = $.post({
-			"url" : "<c:url value='/SelectOldPswServlet'/>",
-			"data" : "password=" + $("#oldpsw").val()+"&uuname=${username}",
+			"url" : "<%=basePath%>selectOldPswServlet/replacePwd",
+			"data" : "password=" + $("#oldpsw").val(),
 			"dataType" : "text",
 			"success" : function(data) {
 				if(inputPSW != ""){
@@ -122,7 +126,6 @@ $("#btn-sb").click(function(){
 		return false;
 	}else{
 		alert("修改成功");
-		top.location.href="<c:url value='/UserQuitServlet'/>"
 //重定向...重新登录
 		
 	}

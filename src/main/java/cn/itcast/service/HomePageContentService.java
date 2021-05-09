@@ -21,9 +21,9 @@ public abstract interface HomePageContentService {
 	 * 
 	 * @return
 	 */
-	List<AMessageBean> selectToday(Page<AMessageBean> page);
+	List<AMessageBean> selectToday(String time, int limit ,int offset);
 
-	List<AMessageBean> selectAll(Page<AMessageBean> page);
+	List<AMessageBean> selectAll(int limit ,int offset);
 
 	/**
 	 * 查状态人的信息
@@ -31,5 +31,5 @@ public abstract interface HomePageContentService {
 	 * @param State 状态 0(疑似)/1(健康)/2(确诊)
 	 * @return
 	 */
-	List<UserBean> selectStateInformation(String State, Page<UserBean> page);
+	List<UserBean> selectStateInformation(String State,int limit ,int offset);
 }

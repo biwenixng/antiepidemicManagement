@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.HomePageContentDao">
+   <select id="selectToday" resultType="cn.itcast.domain.AMessageBean">
+        SELECT u.`username`,
+        u.`name`,
+        m.`temperature`,
+        m.`state`,m.`journey`,
+        m.`uploadtime`
+        FROM `a_message` m ,`a_user` u
+        WHERE m.username = u.username
+        <if test="time != null and time != ''">
+            and m.`uploadtime` LIKE '%${time}%'
+        </if>
+        <if test="limit != -1 and offset != -1">
+          LIMIT #{limit},#{offset}
+        </if>
+   </select>
+
+    <select id="selectAll" resultType="cn.itcast.domain.AMessageBean">
+        SELECT u.`username`,
+        u.`name`,
+        m.`temperature`,
+        m.`state`,m.`journey`,
+        m.`uploadtime`
+        FROM `a_message` m ,`a_user` u
+        WHERE m.username = u.username
+        <if test="limit != -1 and offset != -1">
+             LIMIT #{limit},#{offset}
+        </if>
+    </select>
+
+    <select id="selectStateInformation" resultType="cn.itcast.domain.UserBean">
+        SELECT u.username,o.address,u.residence,u.name,u.phone,u.idnumber,u.integral,u.health 
+		FROM `a_user` u,`a_order` o
+		WHERE u.health =#{health};
+    </select>
+
+    <select id="selevtStateSum" resultType="int">
+       SELECT COUNT(`health`) count
+       FROM `a_user`
+       WHERE `health` = #{health}
+    </select>
+</mapper>

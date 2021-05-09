@@ -17,6 +17,10 @@
 <script type="text/javascript"
 	src='<c:url value='/personalCenter/js/bootstrap.js'/>'></script>
 </head>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <body>
 	<div class="page-header" id="new"
 		style="margin: 0px 15px 0px 15px; padding: 0px;">
@@ -27,12 +31,12 @@
 <script type="text/javascript">
      $(document).ready(function(){
             $.get({
-              "url":"<c:url value='/query_Code'/>",
+              "url":"<%=basePath%>query_Code/selectAUser",
               "data": "username=${username}",
               "dataType":"json",
               "success": function(data){
             	  var obj = data[0];
-              	  var abc = "/Zxiangmu"+obj.healthpath;
+              	  var abc = "/antiepidemic_war"+obj.healthpath;
             	  if(obj.healthpath != ""){
 					var $img = $("<img alt='#' style='width: 300px;height: 300px;margin: 15px 0px 0px 15px;' src='<c:url value='"+abc+"'/>'>");
 					$("#new").after($img);

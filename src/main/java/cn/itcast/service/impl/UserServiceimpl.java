@@ -20,7 +20,7 @@ public class UserServiceimpl implements UserService {
 	}
 
 	@Override
-	public boolean uploadInfo(Message msg) {
+	public int uploadInfo(Message msg) {
 		// TODO Auto-generated method stub
 		return udao.uploadInfo(msg);
 	}
@@ -38,9 +38,9 @@ public class UserServiceimpl implements UserService {
 	}
 
 	@Override
-	public void updatePasssword(String username, String newpsw) {
+	public int updatePasssword(String username, String newpsw) {
 		// TODO Auto-generated method stub
-		udao.updatePasssword(username, newpsw);
+		return udao.updatePasssword(username, newpsw);
 	}
 
 	@Override

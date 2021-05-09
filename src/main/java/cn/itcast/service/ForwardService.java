@@ -1,8 +1,6 @@
 package cn.itcast.service;
 
 import cn.itcast.domain.Forward;
-
-import java.sql.Connection;
 import java.util.List;
 
 
@@ -21,5 +19,5 @@ public interface ForwardService {
 	 * @param link
 	 * @return
 	 */
-	List<Forward> queryTimeMessage(String doctorName, String link);
+	List<Forward> queryTimeMessage( String doctorName,String link);
 }

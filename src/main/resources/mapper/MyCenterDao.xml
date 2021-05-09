@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.MyCenterDao">
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <update id="updatedizi" >
+		UPDATE `a_user`
+	    SET `residence`  = #{residence}
+	    WHERE `username` = #{username}
+	</update>
+
+	<select id="selectQueryUploadInformation" resultType="cn.itcast.domain.QueryUploadInformation">
+		SELECT `temperature`,`journey`,`state`,`uploadtime`
+		FROM `a_message`
+		WHERE `username` = #{username}
+		ORDER BY `uploadtime` DESC
+	</select>
+	<select id="selectQueryUploadInformationPage" resultType="cn.itcast.domain.QueryUploadInformation">
+		SELECT `temperature`,`journey`,`state`,`uploadtime`
+		FROM `a_message`
+		WHERE `username` = #{username}
+		ORDER BY `uploadtime` DESC
+		LIMIT #{limit},#{offset}
+	</select>
+
+	<select id="selectQueryMake" resultType="cn.itcast.domain.QueryMake">
+		SELECT `fid`,u.`name`,d.`name`,`appointmenttime`,`appointtime`
+			 FROM `a_forward` f
+			 INNER JOIN `a_user` u
+			 ON u.username = f.auser
+			 INNER JOIN `d_user` d
+			 ON d.username = f.duser
+			 WHERE f.auser = #{auser} AND f.show = '1'
+			 ORDER BY `appointtime` DESC
+	</select>
+
+	<select id="selectQueryMakePage" resultType="cn.itcast.domain.QueryMake">
+		SELECT `fid`,u.`name`,d.`name` as `dname`,`appointmenttime`,`appointtime`
+			 FROM `a_forward` f
+			 INNER JOIN `a_user` u
+			 ON u.username = f.auser
+			 INNER JOIN `d_user` d
+			 ON d.username = f.duser
+			 WHERE f.auser = #{auser} AND f.show = '1'
+			 ORDER BY `appointtime` DESC
+			 LIMIT #{limit},#{offset}
+	</select>
+
+	<update id="updateQueryMake">
+		UPDATE `a_forward`
+	    SET `show` = '0'
+	    WHERE `fid` = #{fid}
+	</update>
+
+	<select id="selectAUser" resultType="cn.itcast.domain.AUser">
+		SELECT `healthpath`
+		FROM `a_user`
+		WHERE `username` = #{username}
+	</select>
+
+	<update id="updateAUser">
+			UPDATE `a_user`
+			 SET `healthpath`  = #{healthpath}
+			 WHERE `username` = #{username}
+	</update>
+
+	<update id="updateHead">
+	 UPDATE `a_user`
+	 SET `headimg`  = #{headimg}
+	 WHERE `username` = #{username}
+	</update>
+
+	<select id="selectQueryOrder" resultType="cn.itcast.domain.QueryOrder">
+     SELECT o.`phone`,`ordernumber`,u.`name`,`totalquantity`,`actualamount`,`ordertime`,`address`
+	 FROM `a_order` o
+	 INNER JOIN `a_user` u
+	 ON o.username = u.username
+	 WHERE o.username = #{username} AND o.show = '1' AND o.paystatus = '1'
+	 ORDER BY `ordertime` DESC
+	 limit #{limit},#{offset}
+	</select>
+
+	<select id="selectQueryOrderAll" resultType="cn.itcast.domain.QueryOrder">
+     SELECT o.`phone`,`ordernumber`,u.`name`,`totalquantity`,`actualamount`,`ordertime`,`address`
+	 FROM `a_order` o
+	 INNER JOIN `a_user` u
+	 ON o.username = u.username
+	 WHERE o.username = #{username} AND o.show = '1' AND o.paystatus = '1'
+	 ORDER BY `ordertime` DESC
+	</select>
+
+	<update id="updateQueryOrder">
+		UPDATE `a_order`
+		SET `show` = '0'
+		WHERE `ordernumber` = #{ordernumber}
+	</update>
+</mapper>

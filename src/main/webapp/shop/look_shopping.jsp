@@ -355,15 +355,15 @@
     	 $(".row>div").eq(3).empty();
     	// alert($value);
         $.get({
-          "url":"<c:url value='/ShopcarServlet'/>",
-          "data": "method=selectLike&synopsis=" + $value,
+          "url":"<%=basePath%>shopcarServlet/selectLike",
+          "data": "synopsis=" + $value,
           "dataType":"json",
           "success": function(data){
         	 
         	     var n=0;
                  for(var i = 0 ; i < data.length ; i++){
                 	 var  obj = data[i];
-                     var path="/Zxiangmu/"+obj.shoppingimg;
+                     var path="/antiepidemic_war/"+obj.shoppingimg;
                      var  $div = $("<div class='pg-content-img' >"+
                              "<a href='<c:url value='../shopcarServlet/selectOne?cid=\"+obj.cid+\"'/>' ><img src='<c:url value='\"+path+\"'/>' class='pg-content-img-img'></a>"+
                              "<span style='color: red;font-size: x-large'>￥ "+obj.price+"</span>"+

@@ -1,6 +1,7 @@
 package cn.itcast.dao;
 
 import cn.itcast.domain.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,17 +11,33 @@ import java.util.List;
 public interface MyCenterDao {
 
 
-	 /**
+	/**
+	 * 查询所有上传记录
+	 * @param username
+	 * @param page
 	 * @return
-	 * -查询信息上传
 	 */
-	List<QueryUploadInformation> selectQueryUploadInformation(String username, Pages<QueryUploadInformation> page);
-	
+	List<QueryUploadInformation> selectQueryUploadInformation(@Param("username")String username, Pages<QueryUploadInformation> page);
+
+	/**
+	 * 查询上传记录
+	 * @param username
+	 * @param limit
+	 * @param offset
+	 * @return
+	 */
+	List<QueryUploadInformation> selectQueryUploadInformationPage(@Param("username")String username, @Param("limit")int limit,@Param("offset")int offset);
 	/**
     * @return
     * -查询预约记录
     */
-	List<QueryMake> selectQueryMake(String auser, Pages<QueryMake> page);
+	List<QueryMake> selectQueryMake(@Param("auser")String auser, Pages<QueryMake> page);
+
+	/**
+	 * @return
+	 * -查询预约记录分页
+	 */
+	List<QueryMake> selectQueryMakePage(@Param("auser")String auser, @Param("limit")int limit,@Param("offset")int offset);
 	/**
 	 * @return
 	 * -删除预约记录
@@ -31,8 +48,9 @@ public interface MyCenterDao {
 	* @return
 	* -查询购物记录
 	*/
-	List<QueryOrder> selectQueryOrder(String username, Pages<QueryOrder> page);
-	
+	List<QueryOrder> selectQueryOrder(@Param("username")String username,@Param("limit")int limit ,@Param("offset")int offset);
+
+	List<QueryOrder> selectQueryOrderAll(@Param("username")String username);
 	/**
 	* @return
 	* -删除购物记录
@@ -48,17 +66,17 @@ public interface MyCenterDao {
 	* @return
 	* -上传健康码
 	*/
-	void updateAUser(String healthpath,String username);
+	void updateAUser(@Param("healthpath")String healthpath,@Param("username")String username);
 	/**
 	* @return
 	* -查看健康码
 	*/
-	List<AUser> selectAUser(String username);
+	List<AUser> selectAUser(@Param("username")String username);
 	/**
 	* @return
 	* -上传头像
 	*/
-	void updateHead(String headimg,String username);
+	void updateHead(@Param("headimg")String headimg,@Param("username")String username);
 	
 	/**
 	* @return
@@ -82,5 +100,5 @@ public interface MyCenterDao {
 	* @return
 	* -修改住址
 	*/
-	void updatedizi(String residence,String username);
+	void updatedizi(@Param("residence") String residence, @Param("username")String username);
 }

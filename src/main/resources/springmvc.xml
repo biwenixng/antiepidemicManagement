@@ -25,6 +25,7 @@
     <mvc:resources location="/images/" mapping="/images/**" />
     <mvc:resources location="/video/" mapping="/video/**" />
     <mvc:resources location="/user/" mapping="/user/**" />
+    <mvc:resources location="/personalCenter/" mapping="/personalCenter/**" />
     <!--开启SpringMVC注解的支持-->
     <mvc:annotation-driven/>
 </beans>

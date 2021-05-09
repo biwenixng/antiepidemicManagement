@@ -40,6 +40,11 @@ public interface UserLoginDao {
      * @return
      */
     public DUserLogin doctorLogin(DUserLogin newLogin);
+
+    /**
+     * 管理员登录
+     * @return
+     */
     public List<MUserLogin> adminLogin();
 
     /**

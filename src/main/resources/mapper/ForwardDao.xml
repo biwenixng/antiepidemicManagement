@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.ForwardDao">
     <select id="queryTimeMessage" resultType="cn.itcast.domain.Forward" >
-		SELECT f.fid,a.`name` aname,d.`name` dname,appointtime,appointmenttime,f.phone
+		SELECT f.fid,a.`name` as auser,d.`name` as duser,appointtime,appointmenttime,f.phone
 		FROM a_forward f
 		INNER JOIN a_user a
 		ON f.auser = a.username
@@ -14,11 +14,18 @@
 	</select>
 
     <select id="queryForwardAll" resultType="cn.itcast.domain.Forward" >
-		SELECT f.fid,a.`name` as auser,d.`name` as duser,appointtime,appointmenttime,f.phone FROM a_forward f
+		SELECT f.fid,a.`name` as auser,d.`name` as duser,appointtime,appointmenttime,f.phone
+		FROM a_forward f
 		INNER JOIN a_user a
 		ON f.auser = a.username
 		INNER JOIN d_user d
 		ON d.username = f.duser
 		WHERE d.username = #{doctorName} and f.show=1
 	</select>
+
+	<update id="removeReservation" >
+		UPDATE a_forward SET
+		`show` = #{show}
+		WHERE `fid` = #{fid}
+	</update>
 </mapper>

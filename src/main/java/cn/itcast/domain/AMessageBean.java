@@ -6,7 +6,9 @@ package cn.itcast.domain;
  */
 public class AMessageBean {
 
-	private UserBean userName;	//用户名
+	private String username;	//用户
+
+	private String name; //用户名
 	
 	private double temperature; // 体温
 
@@ -15,21 +17,21 @@ public class AMessageBean {
 	private String journey;// 行程
 
 	private String uploadtime; // 上传时间
-	
-	public UserBean getUserName() {
-		return userName;
+
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(UserBean userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getState() {
-		return state;
+	public String getName() {
+		return name;
 	}
 
-	public String getJourney() {
-		return journey;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public double getTemperature() {
@@ -40,7 +42,7 @@ public class AMessageBean {
 		this.temperature = temperature;
 	}
 
-	public String getstate() {
+	public String getState() {
 		return state;
 	}
 
@@ -48,7 +50,7 @@ public class AMessageBean {
 		this.state = state;
 	}
 
-	public String getjourney() {
+	public String getJourney() {
 		return journey;
 	}
 
@@ -64,18 +66,15 @@ public class AMessageBean {
 		this.uploadtime = uploadtime;
 	}
 
-	public AMessageBean() {
+	@Override
+	public String toString() {
+		return "AMessageBean{" +
+				"username='" + username + '\'' +
+				", name='" + name + '\'' +
+				", temperature=" + temperature +
+				", state='" + state + '\'' +
+				", journey='" + journey + '\'' +
+				", uploadtime='" + uploadtime + '\'' +
+				'}';
 	}
-
-	public AMessageBean(UserBean userName, double temperature, String state, String journey, String uploadtime) {
-		super();
-		this.userName = userName;
-		this.temperature = temperature;
-		this.state = state;
-		this.journey = journey;
-		this.uploadtime = uploadtime;
-	}
-	
-	
-
 }

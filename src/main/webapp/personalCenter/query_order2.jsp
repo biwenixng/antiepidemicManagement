@@ -54,7 +54,7 @@
 				    <c:if test="${not empty page}">
 				       <c:if test="${page.currentPage != 1}">
 					   <li>
-					      <a href='<c:url value='/MyQueryOrder?method=selectAllPage&username=${username}&pageCount=1&currentPage=${page.currentPage -1}'/>' aria-label="Previous"> <span
+					      <a href='<c:url value='../myQueryOrder/selectAllPage?username=${username}&pageCount=1&currentPage=${page.currentPage -1}'/>' aria-label="Previous"> <span
 							aria-hidden="true">&laquo;</span>
 					      </a>
 					   </li>
@@ -82,17 +82,17 @@
 					        <li>
 					        <c:choose>
 					           <c:when test="${page.currentPage == index}">
-                               <a href='<c:url value='/MyQueryOrder?method=selectAllPage&username=${username}&pageCount=1&currentPage=${index}'/>' style='background-color: blue;color: white;'>${index}</a>
+                               <a href='<c:url value='../myQueryOrder/selectAllPage?username=${username}&pageCount=1&currentPage=${index}'/>' style='background-color: blue;color: white;'>${index}</a>
 					           </c:when>
 					           <c:otherwise>
-                               <a href='<c:url value='/MyQueryOrder?method=selectAllPage&username=${username}&pageCount=1&currentPage=${index}'/>'>${index}</a>
+                               <a href='<c:url value='../myQueryOrder/selectAllPage?username=${username}&pageCount=1&currentPage=${index}'/>'>${index}</a>
                                </c:otherwise>
 					        </c:choose> 
 					        </li>
 					   </c:forEach>
 					   <c:if test="${page.currentPage != end}">
 					    <li>
-					      <a href='<c:url value='/MyQueryOrder?method=selectAllPage&username=${username}&pageCount=1&currentPage=${page.currentPage +1}'/>' aria-label="Next"> <span
+					      <a href='<c:url value='../myQueryOrder/selectAllPage?username=${username}&pageCount=1&currentPage=${page.currentPage +1}'/>' aria-label="Next"> <span
 							aria-hidden="true">&raquo;</span>
 					      </a>
 					   </li>

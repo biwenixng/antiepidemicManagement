@@ -111,7 +111,7 @@
 <div class=" pg-header">
     <div style="width: 1280px;margin: 0 auto">
         <div class="pg-hover-blue" style="float: left">
-            <a href='<c:url value='/web/index.jsp'/>' class="hover-blue"><font color="#778899">首页</font></a>
+            <a href='<c:url value='/index.jsp'/>' class="hover-blue"><font color="#778899">首页</font></a>
         </div>
         <div style="float: right">
         <a  style="display: inline-block;width: 80px;"

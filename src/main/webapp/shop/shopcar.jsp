@@ -140,12 +140,12 @@
 			 };
 	        var date = new Date();
 	        date.setDate(date.getDate()+7);          
-	        document.cookie = "ck1="+ck1;
-	        document.cookie = "ck2="+ck2;
-	        document.cookie = "ck3="+ck3;
-	        document.cookie = "ck4="+ck4;
-	        document.cookie = "ck5="+ck5;
-	        document.cookie = "ck7="+ck7;
+	        document.cookie = "ck1="+ck1+"; path=/";
+	        document.cookie = "ck2="+ck2+"; path=/";
+	        document.cookie = "ck3="+ck3+"; path=/";
+	        document.cookie = "ck4="+ck4+"; path=/";
+	        document.cookie = "ck5="+ck5+"; path=/";
+	        document.cookie = "ck7="+ck7+"; path=/";
 	        //alert(document.cookie);
 	       
     	 location.href = "<c:url value="/shop/order.jsp"/>";

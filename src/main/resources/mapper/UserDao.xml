@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.UserDao">
+    <select id="selectByUsername" resultType="cn.itcast.domain.User">
+		SELECT `headimg`,`name`,`health`,`phone`,`state`,`idnumber`,`integral`,`residence`
+		From `a_user` au
+		WHERE au.`username` = #{username}
+	</select>
+
+	<update id="updatePasssword">
+		 UPDATE `a_user` as au
+		 SET au.`password` = #{newpsw}
+		 WHERE au.`username` = #{username}
+	</update>
+
+	<select id="selectSiteAll" resultType="cn.itcast.domain.Site">
+		SELECT `sid`,`sname`
+		FROM `a_site`
+	</select>
+
+	<insert id="uploadInfo">
+		INSERT INTO `a_message`(`username`,`temperature`,`state`,`journey`,`uploadtime`)
+		 VALUES(#{Username},#{Temperature},#{State},#{Journey},#{Uploadtime})
+	</insert>
+
+	<update id="updateJfHealth">
+		UPDATE `a_user` as au
+		SET au.`integral` = #{integral},au.`health` = #{Health}
+		WHERE au.`username` = #{Username}
+	</update>
+</mapper>
